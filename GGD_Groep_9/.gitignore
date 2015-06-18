@@ -5,5 +5,12 @@
 .DS_Store
 /build
 *.iml
-gradle.xml
-misc.xml
+/.idea/gradle.xml
+/.idea/misc.xml
+.name
+/.idea/compiler.xml
+/.idea/encodings.xml
+/.idea/modules.xml
+/.idea/*
+/app/app.iml
+GGD_Groep_9.iml
