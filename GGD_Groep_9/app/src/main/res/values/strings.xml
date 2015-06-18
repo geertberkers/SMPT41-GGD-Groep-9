@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">GGD</string>
+    <string name="app_name">Rampen</string>
 
-    <string name="hello_world">Hello GGD!</string>
     <string name="action_settings">Settings</string>
+    <string name="titelRamp">Brand Helmond</string>
+    <string name="laatsteUpdate">Laatste update: 15:00</string>
+    <string name="omschrijvingRamp">De brand bij Chemie-Pack breekt uit op woensdagmiddag 5 januari</string>
 </resources>

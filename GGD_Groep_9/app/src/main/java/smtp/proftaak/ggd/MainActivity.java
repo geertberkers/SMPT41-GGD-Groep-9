@@ -1,41 +1,62 @@
 package smtp.proftaak.ggd;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.database.Cursor;
-import android.provider.ContactsContract;
+
+import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.Toast;
+import java.util.ArrayList;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private ListView rampenListView;
+    private RampAdapter rampAdapter;
+    private ArrayList<Ramp> rampenLijst;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
+        //getSupportActionBar().setHomeButtonEnabled(true);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.appicon);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.oceaanblauw)));
+
+
+        rampenLijst = new ArrayList<>();
+        rampenLijst.add(new Ramp("Brand Helmond", "Laatste update: 15:00", "Kleine brand met veel rook"));
+        rampenLijst.add(new Ramp("Brand Eindhoven", "Laatste update: 14:00", "Grote brand en veel overlast"));
+        rampenLijst.add(new Ramp("Brand Veldhoven", "Laatste update: 12:30", "Kleine brand, brandweer ter plekke"));
+
+        rampenListView = (ListView) findViewById(R.id.rampenListview);
+        rampAdapter = new RampAdapter(this.getApplicationContext(), rampenLijst);
+
+        rampenListView.setAdapter(rampAdapter);
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+
         if (id == R.id.action_settings) {
+            Toast.makeText(context, "Instellingen aangeraakt", duration).show();
             return true;
         }
 

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ggdBlauw">#1a2c54</color>
-    <color name="ggdGeel">#fec80f</color>
-    <color name="oceaanblauw">#008abf</color>
-    <color name="lichtgeel">#fee89d</color>
+    <color name="ggdBlauw">#1A2C54</color>
+    <color name="ggdGeel">#FEC80F</color>
+    <color name="oceaanblauw">#008ABF</color>
+    <color name="lichtgeel">#FEE89d</color>
+    <color name="rood">#FF0000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="transWhite">#CCFFFFFF</color>
 </resources>
