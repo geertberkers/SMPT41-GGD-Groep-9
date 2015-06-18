@@ -16,5 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".RampActivity"
+            android:label="@string/titelRamp">
+        </activity>
     </application>
 </manifest>

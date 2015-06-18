@@ -17,11 +17,6 @@ public class RampAdapter extends BaseAdapter{
 
     private List<Ramp> rampenLijst = new ArrayList<>();
 
-    public void setRampList(List<Ramp> rampenLijst) {
-        this.rampenLijst = rampenLijst;
-        notifyDataSetChanged();
-    }
-
     public RampAdapter(Context context, List<Ramp> rampenLijst) {
         this.context = context;
         this.rampenLijst = rampenLijst;
