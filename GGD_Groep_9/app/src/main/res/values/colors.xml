@@ -5,6 +5,7 @@
     <color name="oceaanblauw">#008ABF</color>
     <color name="lichtgeel">#FEE89d</color>
     <color name="rood">#FF0000</color>
+    <color name="zwart">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="transWhite">#CCFFFFFF</color>
 </resources>

@@ -39,6 +39,7 @@
         android:layout_toLeftOf="@+id/arrow"
         android:layout_toRightOf="@+id/warningImage"
         android:textStyle="bold"
+        android:textColor="@color/zwart"
         android:text="@string/laatsteUpdate"
         android:layout_marginBottom="@dimen/half_activity_vertical_margin"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -48,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/laatsteUpdate"
+        android:textColor="@color/zwart"
         android:layout_toLeftOf="@+id/arrow"
         android:layout_toRightOf="@+id/warningImage"
         android:text="@string/omschrijvingRamp"

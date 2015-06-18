@@ -26,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
         //getSupportActionBar().setHomeButtonEnabled(true);
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.appicon);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.oceaanblauw)));
 
 
