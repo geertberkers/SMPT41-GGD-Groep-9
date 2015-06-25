@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * Created by Geert on 18-6-2015
  */
@@ -45,6 +47,21 @@ public class RampActivity extends BaseActivity {
         /** Add the tabs  to the TabHost to display. */
        // tabHost.addTab(tab1);
        // tabHost.addTab(tab2);
+
+        //AANZETTEN OM TIJDLIJN FRAGMENT TE TESTEN
+//        if (getFragmentManager().findFragmentById(android.R.id.content) == null) {
+//            ArrayList<TijdlijnItem> TESTITEMS = new ArrayList<TijdlijnItem>();
+//            String lipsum = "Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.";
+//            TESTITEMS.add(new TijdlijnItem("title", "src", "11:23", lipsum));
+//            TESTITEMS.add(new TijdlijnItem("title2", "chemiepack", "14:23", lipsum));
+//            TESTITEMS.add(new TijdlijnItem("title3", "src2", "00:23", lipsum));
+//            TESTITEMS.add(new TijdlijnItem("title4", "src2", "11:12", lipsum));
+//            TESTITEMS.add(new TijdlijnItem("title5", "src2", "12:34", lipsum));
+//            TESTITEMS.add(new TijdlijnItem("title6", "chemiepack", "23:58", lipsum));
+//
+//            TijdlijnFragment list = new TijdlijnFragment(this, TESTITEMS);
+//            getFragmentManager().beginTransaction().add(android.R.id.content, list).commit();
+//        }
     }
 
     @Override
