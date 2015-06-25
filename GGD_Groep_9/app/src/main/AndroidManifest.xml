@@ -20,5 +20,7 @@
         <activity android:name=".RampActivity"
             android:label="@string/titelRamp">
         </activity>
+
+        <activity android:name=".settingsActivity" android:label="@string/settingsTitel"></activity>
     </application>
 </manifest>

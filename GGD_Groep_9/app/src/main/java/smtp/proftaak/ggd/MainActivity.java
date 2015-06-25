@@ -65,7 +65,8 @@ public class MainActivity extends ActionBarActivity {
         int duration = Toast.LENGTH_SHORT;
 
         if (id == R.id.action_settings) {
-            Toast.makeText(context, "Instellingen aangeraakt", duration).show();
+            Intent intent = new Intent(this, settingsActivity.class);
+            this.startActivity(intent);
             return true;
         }
 
