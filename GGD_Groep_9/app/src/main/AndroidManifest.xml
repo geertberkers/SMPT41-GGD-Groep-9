@@ -25,6 +25,15 @@
                 android:value="smpt.proftaak.ggd.MainActivity" />>
         </activity>
 
+<<<<<<< Updated upstream
         <activity android:name="smpt.proftaak.ggd.settingsActivity" android:label="@string/settingsTitel"></activity>
+=======
+        <activity android:name=".settingsActivity" android:label="@string/settingsTitel"></activity>
+
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+        <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
+>>>>>>> Stashed changes
     </application>
 </manifest>
