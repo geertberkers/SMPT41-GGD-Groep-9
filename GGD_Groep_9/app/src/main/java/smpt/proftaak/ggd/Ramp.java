@@ -1,9 +1,7 @@
-package smtp.proftaak.ggd;
+package smpt.proftaak.ggd;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.util.ArrayList;
 
 /**
  * Created by Geert on 18-6-2015

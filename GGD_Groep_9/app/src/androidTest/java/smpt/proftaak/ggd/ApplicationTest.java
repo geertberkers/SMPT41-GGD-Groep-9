@@ -1,4 +1,4 @@
-package smtp.proftaak.ggd;
+package smpt.proftaak.ggd;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

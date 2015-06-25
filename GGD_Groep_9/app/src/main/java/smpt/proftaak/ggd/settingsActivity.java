@@ -1,16 +1,19 @@
-package smtp.proftaak.ggd;
+package smpt.proftaak.ggd;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
 /**
- * Created by Geert on 19-6-2015
+ * Created by BartKneepkens on 25/06/15.
  */
-public class BaseActivity extends ActionBarActivity {
+public class settingsActivity extends ActionBarActivity {
 
-    public void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.settings_activity);
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.oceaanblauw)));

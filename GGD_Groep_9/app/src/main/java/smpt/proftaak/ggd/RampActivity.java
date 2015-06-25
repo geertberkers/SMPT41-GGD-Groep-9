@@ -1,4 +1,4 @@
-package smtp.proftaak.ggd;
+package smpt.proftaak.ggd;
 
 import android.content.Intent;
 import android.os.Bundle;

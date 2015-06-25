@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="smtp.proftaak.ggd">
+    package="smpt.proftaak.ggd">
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="smpt.proftaak.ggd.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,14 +17,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RampActivity"
+        <activity android:name="smpt.proftaak.ggd.RampActivity"
             android:label="@string/titelRamp"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName="smpt.proftaak.ggd.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />>
+                android:value="smpt.proftaak.ggd.MainActivity" />>
         </activity>
 
-        <activity android:name=".settingsActivity" android:label="@string/settingsTitel"></activity>
+        <activity android:name="smpt.proftaak.ggd.settingsActivity" android:label="@string/settingsTitel"></activity>
     </application>
 </manifest>

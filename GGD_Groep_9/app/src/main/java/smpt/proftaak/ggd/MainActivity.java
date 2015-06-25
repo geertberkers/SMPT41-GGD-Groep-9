@@ -1,10 +1,8 @@
-package smtp.proftaak.ggd;
+package smpt.proftaak.ggd;
 
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
