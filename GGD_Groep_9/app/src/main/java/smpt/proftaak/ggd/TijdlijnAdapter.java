@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -80,6 +82,17 @@ public class TijdlijnAdapter extends ArrayAdapter<TijdlijnItem>
         else
         {
             imageView.setImageResource(imageResourceIdentifier);
+        }
+
+        switch(currentItem.getAnimationPermission())
+        {
+            case ANIMATE:
+                Animation animation = AnimationUtils.loadAnimation(context, R.anim.newtimelineitem);
+                rowView.startAnimation(animation);
+                currentItem.revokeAnimationPermission();
+                break;
+            case NO_ANIMATION:
+                break;
         }
 
         //return prepared row
