@@ -5,4 +5,19 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/oceaanblauw</item>
+    </style>
+
+    <style name="settingsStyle">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:textColor">@color/oceaanblauw</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+
 </resources>
