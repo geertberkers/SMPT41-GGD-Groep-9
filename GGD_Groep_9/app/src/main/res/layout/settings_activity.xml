@@ -1,86 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/">
+    android:id="@+id/lin">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:text="LOGIN BUTTON"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollViewSettings">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/TelNr"
-        android:id="@+id/textView2"
-        android:layout_gravity="left"
-        style="@style/settingsStyle"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
+            >
 
-    <View style="@style/Divider"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TelNr"
+                android:id="@+id/textView2"
+                android:layout_gravity="left"
+                style="@style/settingsStyle"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/editText"
-        android:hint="06 12 34 56 78"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:textColor="@color/textGrijs" />
+            <View style="@style/Divider"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Gps"
-        android:id="@+id/textView3"
-        android:layout_gravity="left"
-        style="@style/settingsStyle"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:ems="10"
+                android:id="@+id/editText"
+                android:hint="06 12 34 56 78"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/textGrijs"
+                android:windowSoftInputMode="stateHidden"/>
 
-    <View style="@style/Divider"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Gps"
+                android:id="@+id/textView3"
+                android:layout_gravity="left"
+                style="@style/settingsStyle"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+            <View style="@style/Divider"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/GPSLocatie"
-            android:id="@+id/textView4"
-            android:textColor="@color/textGrijs"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
 
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/switch1"
-            style="@style/Widget.AppCompat.CompoundButton.Switch"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="21dp"
-            android:layout_marginEnd="21dp"
-            android:checked="false" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/GPSLocatie"
+                    android:id="@+id/textView4"
+                    android:textColor="@color/textGrijs"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
-    </RelativeLayout>
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/gpsSwitch"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:checked="true"
+                    android:layout_alignTop="@+id/textView4"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
 
-    <ImageButton
-        android:layout_width="262dp"
-        android:layout_height="26dp"
-        android:id="@+id/imageButton"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/btn_stdloc"
-        android:scaleType="fitXY"
-        android:background="@null"
-        android:layout_marginTop="20dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/noGPS"
+                android:id="@+id/tvNoGps"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Postcode"
+                android:id="@+id/tvPostcode"
+                style="@style/settingsStyle" />
+
+            <View style="@style/Divider"
+                android:id="@+id/cvPostcode" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:ems="10"
+                android:id="@+id/etPostcode"
+                android:hint="@string/examplePostcode"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+               />
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
