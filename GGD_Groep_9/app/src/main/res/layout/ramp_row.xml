@@ -8,7 +8,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@color/transparantWit">
-    <!--android:background="@color/wit"-->
 
     <ImageView
         android:id="@+id/warningImage"
@@ -19,7 +18,8 @@
         android:layout_alignParentTop="true"
         android:src="@drawable/warning"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_above="@+id/omschrijving" />
+        android:layout_above="@+id/omschrijving"
+        android:scaleType="center" />
 
     <TextView
         android:id="@+id/titelRamp"
@@ -47,6 +47,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
+        android:ellipsize="end"
+        android:singleLine="true"
         android:id="@+id/omschrijving"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

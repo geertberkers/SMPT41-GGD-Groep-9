@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="smtp.proftaak.ggd" >
+    package="smtp.proftaak.ggd">
 
     <application
         android:allowBackup="true"
@@ -18,7 +18,11 @@
         </activity>
 
         <activity android:name=".RampActivity"
-            android:label="@string/titelRamp">
+            android:label="@string/titelRamp"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />>
         </activity>
 
         <activity android:name=".settingsActivity" android:label="@string/settingsTitel"></activity>

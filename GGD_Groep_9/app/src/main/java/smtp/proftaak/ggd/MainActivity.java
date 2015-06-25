@@ -15,20 +15,20 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends BaseActivity {
 
     private ListView rampenListView;
     private RampAdapter rampAdapter;
     private ArrayList<Ramp> rampenLijst;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.oceaanblauw)));
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.oceaanblauw)));
 
         rampenLijst = new ArrayList<>();
         rampenLijst.add(new Ramp("Brand Helmond", "Laatste update: 15:00", "Kleine brand met veel rook"));
