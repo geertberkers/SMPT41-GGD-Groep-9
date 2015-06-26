@@ -1,5 +1,7 @@
 package smpt.proftaak.ggd;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,12 +17,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class VragenlijstActivity extends ActionBarActivity {
+public class VragenlijstActivity extends BaseActivity {
 
     private ArrayList<String> symptomen;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vragenlijst);
 
@@ -72,5 +74,24 @@ public class VragenlijstActivity extends ActionBarActivity {
         TESTDATA.add("Ogen");
 
         return TESTDATA;
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_vragenlijst, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_sendVragenlijst) {
+            //TODO
+            Toast.makeText(this, "VERSTUUR VRAGENLIJST", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
