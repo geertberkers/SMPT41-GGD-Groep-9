@@ -20,4 +20,12 @@
         <item name="android:layout_marginTop">20dp</item>
     </style>
 
+    <style name="vragenlijstStyle">
+        <item name="android:textColor">@color/grijs</item>
+    </style>
+    <style name="vragenlijstStyle.Title">
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">9pt</item>
+    </style>
 </resources>
