@@ -156,12 +156,12 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
                 // Could not resolve the connection result, show the user an
                 // error dialog.
                 //showErrorDialog(connectionResult);
-                Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), connectionResult.toString(), Toast.LENGTH_SHORT).show();
             }
         } else {
             // Show the signed-out UI
             //showSignedOutUI();
-            Toast.makeText(getApplicationContext(), "logged out", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "uitgelogd", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -202,7 +202,7 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
 
         // Show a message to the user that we are signing in.
         //mStatusTextView.setText(R.string.signing_in);
-        Toast.makeText(getApplicationContext(), "signing in", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "signing in", Toast.LENGTH_SHORT).show();
     }
 
     public void onSignOutClicked()
@@ -213,7 +213,7 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
         }
 
 
-        Toast.makeText(getApplicationContext(), "signed out ", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "signed out ", Toast.LENGTH_SHORT).show();
         isSignedIn = false;
 
 
