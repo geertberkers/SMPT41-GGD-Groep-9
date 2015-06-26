@@ -19,4 +19,8 @@
     <string name="title_activity_vragenlijst">VragenlijstActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="inloggen">inloggen</string>
+    <string name="uitloggen">uitloggen</string>
+    <string name="ingelogd">Ingelogd met Google+</string>
+    <string name="uitgelogd">Uitgelogd</string>
 </resources>

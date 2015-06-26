@@ -4,7 +4,13 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
+<<<<<<< HEAD
+=======
+import android.util.Log;
+import android.view.MenuItem;
+>>>>>>> origin/master
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -102,7 +108,7 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
 
         // Show the signed-in UI
         //showSignedInUI();
-        Toast.makeText(getApplicationContext(), "signed in!!!! 1337", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), getString(R.string.ingelogd), Toast.LENGTH_SHORT).show();
 
         isSignedIn = true;
 
@@ -114,7 +120,7 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
 
             if (v instanceof TextView) {
                 TextView tv = (TextView) v;
-                tv.setText("uitloggen");
+                tv.setText(getString(R.string.uitloggen));
                 return;
             }
         }
@@ -154,12 +160,12 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
                 // Could not resolve the connection result, show the user an
                 // error dialog.
                 //showErrorDialog(connectionResult);
-                Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), connectionResult.toString(), Toast.LENGTH_SHORT).show();
             }
         } else {
             // Show the signed-out UI
             //showSignedOutUI();
-            Toast.makeText(getApplicationContext(), "logged out", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), getString(R.string.uitgelogd), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -200,7 +206,7 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
 
         // Show a message to the user that we are signing in.
         //mStatusTextView.setText(R.string.signing_in);
-        Toast.makeText(getApplicationContext(), "signing in", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "signing in", Toast.LENGTH_SHORT).show();
     }
 
     public void onSignOutClicked()
@@ -211,11 +217,11 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
         }
 
 
-        Toast.makeText(getApplicationContext(), "signed out ", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "signed out ", Toast.LENGTH_SHORT).show();
         isSignedIn = false;
 
 
-        //set de button naar 'uitloggen'
+        //set de button naar 'inloggen'
         SignInButton signInButton = (SignInButton) this.findViewById(R.id.sign_in_button);
         // Find the TextView that is inside of the SignInButton and set its text
         for (int i = 0; i < signInButton.getChildCount(); i++) {
@@ -223,7 +229,7 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
 
             if (v instanceof TextView) {
                 TextView tv = (TextView) v;
-                tv.setText("inloggen");
+                tv.setText(getString(R.string.inloggen));
                 return;
             }
         }
@@ -245,5 +251,16 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
             mIsResolving = false;
             mGoogleApiClient.connect();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
