@@ -12,7 +12,6 @@ public class Ramp implements Parcelable{
     private String laatsteUpdate;
     private String omschrijving;
 
-
     public Ramp(String titelRamp, String laatsteUpdate, String omschrijving) {
         this.titelRamp = titelRamp;
         this.laatsteUpdate = laatsteUpdate;
@@ -42,7 +41,6 @@ public class Ramp implements Parcelable{
     public void setOmschrijving(String omschrijving) {
         this.omschrijving = omschrijving;
     }
-
 
     public Ramp(Parcel read){
         this.titelRamp = read.readString();

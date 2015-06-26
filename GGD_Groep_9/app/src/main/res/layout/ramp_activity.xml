@@ -2,53 +2,68 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/achtergrond"
     android:orientation="vertical"
-    android:background="@color/achtergrond">
+    android:weightSum="1">
 
-
-    <TabHost
+    <LinearLayout
+        android:id="@+id/linearMap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tabHost"
-        android:layout_gravity="center_horizontal">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <Button
+            android:id="@+id/button3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="250dp"
+            android:text="New Button" />
 
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/tabTijdlijn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/linearButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearMap"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-                </LinearLayout>
+        <Button
+            android:id="@+id/btnTijdlijn"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight=".5"
+            android:background="@android:color/transparent"
+            android:onClick="onClick"
+            android:text="Tijdlijn" />
 
-                <LinearLayout
-                    android:id="@+id/tabInfo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+        <Button
+            android:id="@+id/btnInformatie"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight=".5"
+            android:background="@android:color/transparent"
+            android:onClick="onClick"
+            android:text="Informatie" />
 
-                </LinearLayout>
-            </FrameLayout>
+    </LinearLayout>
 
-        </LinearLayout>
-    </TabHost>
-
-    <TabWidget
-        android:id="@android:id/tabs"
+    <View
+        style="@style/buttonBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_alignBottom="@id/linearButton"
+        android:layout_alignTop="@id/linearButton"></View>
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearButton"
         android:layout_centerHorizontal="true">
 
-    </TabWidget>
+    </FrameLayout>
 
 </RelativeLayout>

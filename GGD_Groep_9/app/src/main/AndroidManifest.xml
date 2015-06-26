@@ -6,10 +6,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+
         <activity
             android:name="smpt.proftaak.ggd.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,15 +18,25 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="smpt.proftaak.ggd.RampActivity"
+        <activity
+            android:name="smpt.proftaak.ggd.RampActivity"
             android:label="@string/titelRamp"
-            android:parentActivityName="smpt.proftaak.ggd.MainActivity" >
+            android:parentActivityName="smpt.proftaak.ggd.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="smpt.proftaak.ggd.MainActivity" />>
         </activity>
 
-        <activity android:name="smpt.proftaak.ggd.settingsActivity" android:label="@string/settingsTitel"></activity>
+        <activity
+            android:name="smpt.proftaak.ggd.settingsActivity"
+            android:label="@string/settingsTitel">
+        </activity>
+
+        <activity
+            android:name="smpt.proftaak.ggd.BaseActivity"
+            android:label="@string/app_name">
+        </activity>
+
         <uses-permission android:name="android.permission.INTERNET" />
         <uses-permission android:name="android.permission.GET_ACCOUNTS" />
         <uses-permission android:name="android.permission.USE_CREDENTIALS" />

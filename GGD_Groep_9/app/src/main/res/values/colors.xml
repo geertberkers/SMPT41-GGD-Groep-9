@@ -6,9 +6,10 @@
     <color name="lichtgeel">#FEE89d</color>
     <color name="rood">#FF0000</color>
     <color name="zwart">#000000</color>
-    <color name="grijs">#6a6a6a</color>
+    <color name="grijs">#6A6A6A</color>
     <color name="wit">#FFFFFF</color>
     <color name="transparantWit">#BBFFFFFF</color>
     <color name="achtergrond">#F0F0F0</color>
     <color name="textGrijs">#6A6A6A</color>
+    <color name="lichteGrijs">#B4B4B4</color>
 </resources>
