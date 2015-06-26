@@ -78,7 +78,8 @@ public class TijdlijnFragment extends ListFragment {
             }
         };
 
-        timer.schedule(addNewItemTask, 1500, 10000);
+        //voeg 1 nieuw item toe
+        timer.schedule(addNewItemTask, 1500);
     }
 
     @Override

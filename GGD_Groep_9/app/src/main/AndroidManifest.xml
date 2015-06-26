@@ -48,5 +48,9 @@
         <uses-permission android:name="android.permission.GET_ACCOUNTS" />
         <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
+        <activity
+            android:name=".VragenlijstActivity"
+            android:label="@string/title_activity_vragenlijst" >
+        </activity>
     </application>
 </manifest>
