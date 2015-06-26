@@ -4,22 +4,40 @@
     tools:context="smpt.proftaak.ggd.VragenlijstActivity"
     android:orientation="vertical">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/vragenlijstStyle.Title"
-        android:text="Vink uw symptomen aan"/>
+        android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/vragenlijstSymptomen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/vragenlijstStyle.Title"
+                android:text="Vink uw symptomen aan"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Overige symptomen"
-        style="@style/vragenlijstStyle.Title"/>
+            <ListView
+                android:id="@+id/vragenlijstSymptomen"
+                android:dividerHeight="1dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </ListView>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Overige symptomen"
+                style="@style/vragenlijstStyle.Title"/>
+
+            <EditText
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Raak aan om te typen..."
+                android:gravity="bottom"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
+
