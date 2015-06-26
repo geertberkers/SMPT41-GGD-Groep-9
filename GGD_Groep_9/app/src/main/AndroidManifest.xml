@@ -20,6 +20,7 @@
             android:name=".RampActivity"
             android:label="@string/titelRamp"
             android:parentActivityName=".MainActivity" >
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="smpt.proftaak.ggd.MainActivity" />
@@ -27,7 +28,12 @@
         </activity>
         <activity
             android:name=".settingsActivity"
-            android:label="@string/settingsTitel" />
+            android:label="@string/settingsTitel"
+            android:parentActivityName=".MainActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="smpt.proftaak.ggd.MainActivity" />
+        </activity>
 
         <uses-permission android:name="android.permission.INTERNET" />
         <uses-permission android:name="android.permission.GET_ACCOUNTS" />
