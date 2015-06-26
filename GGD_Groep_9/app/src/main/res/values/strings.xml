@@ -2,6 +2,7 @@
     <string name="app_name">R.A.M.P.</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_sendVragenlijst">Verstuur vragenlijst</string>
     <string name="titelRamp">Brand Helmond</string>
     <string name="laatsteUpdate">Laatste update: 15:00</string>
     <string name="omschrijvingRamp">De brand bij Chemie-Pack breekt uit op woensdagmiddag 5 januari</string>
@@ -15,4 +16,7 @@
     <string name="lipsum">Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</string>
     <string name="examplePostcode">5612 MA</string>
     <string name="noGPS">Indien GPS locatie bepaling uit staat, kunt u uw postcode invoeren.</string>
+    <string name="title_activity_vragenlijst">VragenlijstActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

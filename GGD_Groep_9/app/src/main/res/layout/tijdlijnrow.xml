@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="Brand breekt uit bij Chemie-Pack"
             android:textSize="9pt"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="4dp"
             android:textColor="@android:color/black"/>
 
         <LinearLayout
@@ -47,6 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginRight="5dp"
                 android:text="@string/lipsum"
                 android:maxLines="4"/>
         </LinearLayout>

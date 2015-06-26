@@ -1,9 +1,9 @@
 package smpt.proftaak.ggd;
 
-import android.os.Bundle;
 import android.app.ListFragment;
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,12 +79,12 @@ public class TijdlijnFragment extends ListFragment {
         };
 
         timer.schedule(addNewItemTask, 1500, 10000);
-
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Log.i("FragmentList", "Item clicked: " + id);
+        Intent vragenlijstIntent = new Intent(v.getContext(), VragenlijstActivity.class);
+        v.getContext().startActivity(vragenlijstIntent);
     }
 
     @Override

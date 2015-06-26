@@ -24,5 +24,13 @@
         <item name="android:background">@drawable/button_background</item>
     </style>
 
+    <style name="vragenlijstStyle">
+        <item name="android:textColor">@color/grijs</item>
+    </style>
 
+    <style name="vragenlijstStyle.Title">
+        <item name="android:padding">6dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">9pt</item>
+    </style>
 </resources>
