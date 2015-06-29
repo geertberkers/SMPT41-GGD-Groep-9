@@ -1,12 +1,18 @@
 package smpt.proftaak.ggd;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -24,51 +30,62 @@ public class RampActivity extends BaseActivity {
 
     private Ramp ramp;
 
+    private Button btnTijdlijn;
+    private Button btnInformatie;
+    private Fragment tijdlijnFragment;
+    private Fragment informatieFragment;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ramp_activity);
+
+        btnTijdlijn = (Button) findViewById(R.id.btnTijdlijn);
+        btnInformatie = (Button) findViewById(R.id.btnInformatie);
+
+        //btnInformatie.setBackground(getResources().getDrawable(R.drawable.info_button));
+        //btnTijdlijn.setBackground(getResources().getDrawable(R.drawable.tijdlijn_button_selected));
 
         Bundle b = getIntent().getExtras();
         ramp = b.getParcelable("ramp");
 
         getSupportActionBar().setTitle(ramp.getTitelRamp());
 
-        // create the TabHost that will contain the Tabs
-        //TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
-
         Intent intent = new Intent(this, RampActivity.class);
         intent.putExtra("ramp", ramp);
-/*
-        TabHost.TabSpec tab1 = tabHost.newTabSpec("Tijdlijn Tab");
-        TabHost.TabSpec tab2 = tabHost.newTabSpec("Info Tab");
 
-        // Set the Tab name and Activity
-        // that will be opened when particular Tab will be selected
-        tab1.setIndicator("Tijdlijn");
-        tab1.setContent(intent);
-
-        tab2.setIndicator("Info");
-        tab2.setContent(intent);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("ramp", ramp);
 
 
-        /** Add the tabs  to the TabHost to display. */
-       // tabHost.addTab(tab1);
-       // tabHost.addTab(tab2);
+        tijdlijnFragment = new TijdlijnFragment();
+        informatieFragment = new InformatieFragment();
+
+        fragmentManager = getFragmentManager();
+
+        informatieFragment.setArguments(bundle);
 
         //AANZETTEN OM TIJDLIJN FRAGMENT TE TESTEN
         if (getFragmentManager().findFragmentById(android.R.id.content) == null) {
-            ArrayList<TijdlijnItem> TESTITEMS = new ArrayList<TijdlijnItem>();
-            String lipsum = "Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.";
-            TESTITEMS.add(new TijdlijnItem("title", "src", "11:23", lipsum));
-            TESTITEMS.add(new TijdlijnItem("title2", "chemiepack", "14:23", lipsum));
-            TESTITEMS.add(new TijdlijnItem("title3", "src2", "00:23", lipsum));
-            TESTITEMS.add(new TijdlijnItem("title4", "src2", "11:12", lipsum));
-            TESTITEMS.add(new TijdlijnItem("title5", "src2", "12:34", lipsum));
-            TESTITEMS.add(new TijdlijnItem("title6", "chemiepack", "23:58", lipsum));
 
-            TijdlijnFragment list = new TijdlijnFragment(this, TESTITEMS);
-            getFragmentManager().beginTransaction().add(android.R.id.content, list).commit();
+            String lipsum = "Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.";
+
+            ArrayList<TijdlijnItem> testNews = new ArrayList<>();
+            testNews.add(new TijdlijnItem("title", "src", "11:23", lipsum));
+            testNews.add(new TijdlijnItem("title2", "chemiepack", "14:23", lipsum));
+            testNews.add(new TijdlijnItem("title3", "src2", "00:23", lipsum));
+            testNews.add(new TijdlijnItem("title4", "src2", "11:12", lipsum));
+            testNews.add(new TijdlijnItem("title5", "src2", "12:34", lipsum));
+            testNews.add(new TijdlijnItem("title6", "chemiepack", "23:58", lipsum));
+
+            bundle.putParcelableArrayList("tijdlijnItems", testNews);
+            tijdlijnFragment.setArguments(bundle);
+
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.frameLayout, tijdlijnFragment);
+            fragmentTransaction.commit();
         }
     }
 
@@ -86,9 +103,32 @@ public class RampActivity extends BaseActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.action_settings:
-                Toast.makeText(this.getApplicationContext(), "Instellingen aangeraakt", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, settingsActivity.class);
+                this.startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.btnTijdlijn:
+                btnTijdlijn.setTextColor(getResources().getColor(R.color.zwart));
+                btnInformatie.setTextColor(getResources().getColor(R.color.lichteGrijs));
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frameLayout, tijdlijnFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                break;
+            case R.id.btnInformatie:
+                btnInformatie.setTextColor(getResources().getColor(R.color.zwart));
+                btnTijdlijn.setTextColor(getResources().getColor(R.color.lichteGrijs));
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frameLayout, informatieFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                break;
+        }
     }
 }

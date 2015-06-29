@@ -1,9 +1,12 @@
 package smpt.proftaak.ggd;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Joep on 25-6-2015.
  */
-public class TijdlijnItem
+public class TijdlijnItem implements Parcelable
 {
     private String title;
     private String imgSrc;
@@ -43,5 +46,41 @@ public class TijdlijnItem
     public void revokeAnimationPermission()
     {
         animate = AnimationPermission.NO_ANIMATION;
+    }
+
+    public TijdlijnItem(Parcel read){
+        title = read.readString();
+        imgSrc = read.readString();
+        timestamp = read.readString();
+        description = read.readString();
+        animate = (AnimationPermission) read.readValue(AnimationPermission.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<TijdlijnItem> CREATOR =
+            new Parcelable.Creator<TijdlijnItem>(){
+
+                @Override
+                public TijdlijnItem createFromParcel(Parcel source) {
+                    return new TijdlijnItem(source);
+                }
+
+                @Override
+                public TijdlijnItem[] newArray(int size) {
+                    return new TijdlijnItem[size];
+                }
+            };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(imgSrc);
+        dest.writeString(timestamp);
+        dest.writeString(description);
+        dest.writeValue(animate);
     }
 }

@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="smpt.proftaak.ggd" >
+    package="smpt.proftaak.ggd">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:name="smpt.proftaak.ggd.MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".RampActivity"
-            android:label="@string/titelRamp"
-            android:parentActivityName=".MainActivity" >
 
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="smpt.proftaak.ggd.MainActivity" />
->
-        </activity>
         <activity
+            android:name="smpt.proftaak.ggd.RampActivity"
+            android:label="@string/titelRamp"
+            android:parentActivityName="smpt.proftaak.ggd.MainActivity">
+            android:parentActivityName=".MainActivity" >
+         <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="smpt.proftaak.ggd.MainActivity" />>
+        </activity>
+
+        <activity
+            android:name="smpt.proftaak.ggd.settingsActivity"
+            android:label="@string/settingsTitel">
+        </activity>
+
+        <activity
+            android:name="smpt.proftaak.ggd.BaseActivity"
+            android:label="@string/app_name">
             android:name=".settingsActivity"
             android:label="@string/settingsTitel"
             android:parentActivityName=".MainActivity">
@@ -45,5 +54,4 @@
             android:label="@string/title_activity_vragenlijst" >
         </activity>
     </application>
-
 </manifest>
