@@ -31,6 +31,9 @@
         <activity
             android:name="smpt.proftaak.ggd.settingsActivity"
             android:label="@string/settingsTitel">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="smpt.proftaak.ggd.MainActivity" />
         </activity>
 
         <activity
