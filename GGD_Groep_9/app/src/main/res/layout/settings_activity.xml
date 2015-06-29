@@ -112,13 +112,13 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPostalAddress"
                 android:ems="10"
                 android:id="@+id/etPostcode"
                 android:hint="@string/examplePostcode"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-               />
+                android:inputType="textPostalAddress"
+                android:singleLine="true" />
 
         </LinearLayout>
     </ScrollView>

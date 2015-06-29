@@ -73,7 +73,7 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
             }
         });
 
-        locatieInputChanged();
+
 
 
         // Build GoogleApiClient with access to basic profile
@@ -84,22 +84,41 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
                 .addScope(new Scope(Scopes.PROFILE))
                 .build();
 
+
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-        final EditText edNumber = (EditText) findViewById(R.id.etNumber);
-        edNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+        final EditText etNumber = (EditText) findViewById(R.id.etNumber);
+        etNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_DONE)
-                {
-                    if(!edNumber.getText().equals("")) {
-                        if (edNumber.getText().length() == 10) {
-                            saveToSharedPref(edNumber.getText().toString(), null);
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    if (!etNumber.getText().equals("")) {
+                        if (etNumber.getText().length() == 10) {
+                            saveToSharedPref(etNumber.getText().toString(), null);
                         }
                     }
                 }
                 return false;
             }
         });
+
+        final EditText etPostcode = (EditText) findViewById(R.id.etPostcode);
+        etPostcode.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_DONE){
+                    if(!etPostcode.getText().equals("")){
+                        if(etPostcode.getText().toString().trim().length() == 6) {
+                            //additional checks for input
+                            saveToSharedPref(null, etPostcode.getText().toString().trim());
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+
+
 
 
         if(sharedPrefPresent()) {
@@ -325,6 +344,7 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
 
     private void saveToSharedPref(String number, String postcode){
         SharedPreferences prefs = this.getSharedPreferences("smpt.proftaak.ggd", Context.MODE_PRIVATE);
+        if(number != null)
         prefs.edit().putString(getString(R.string.sharedpref_number), number).apply();
 
         if(postcode != null)
@@ -336,6 +356,11 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
         if(thisUser !=null){
             EditText etNumber = (EditText) this.findViewById(R.id.etNumber);
             etNumber.setText(thisUser.getNumber());
+
+            EditText etPostcode = (EditText) this.findViewById(R.id.etPostcode);
+            etPostcode.setText(thisUser.getPostcode());
         }
+
+        locatieInputChanged();
     }
 }
