@@ -1,14 +1,20 @@
 package smpt.proftaak.ggd;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -19,22 +25,34 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.plus.People;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
+import com.google.android.gms.plus.model.people.PersonBuffer;
 
 /**
  * Created by BartKneepkens on 25/06/15.
  */
+
 public class settingsActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener
-{
+        View.OnClickListener, ResultCallback<People.LoadPeopleResult> {
+
     boolean postcodeHidden = true;
     boolean isSignedIn;
+
+    static User thisUser;
 
     private static final int RC_SIGN_IN = 0;
     /* Client used to interact with Google APIs. */
     private GoogleApiClient mGoogleApiClient;
+    /* Is there a ConnectionResult resolution in progress? */
+    private boolean mIsResolving = false;
+    /* Should we automatically resolve ConnectionResults when possible? */
+    private boolean mShouldResolve = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,30 +88,28 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
                 .build();
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
+        final EditText edNumber = (EditText) findViewById(R.id.etNumber);
+        edNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_DONE)
+                {
+                    if(!edNumber.getText().equals("")) {
+                        if (edNumber.getText().length() == 10) {
+                            saveToSharedPref(edNumber.getText().toString(), null);
+                        }
+                    }
+                }
+                return false;
+            }
+        });
 
-    }
 
-    private void locatieInputChanged()
-    {
-        TextView postcode = (TextView) this.findViewById(R.id.tvPostcode);
-        View cv = this.findViewById(R.id.cvPostcode);
-        EditText ed = (EditText) this.findViewById(R.id.etPostcode);
-        TextView noGps = (TextView) this.findViewById(R.id.tvNoGps);
-
-        if(postcodeHidden)
-        {
-            postcode.setVisibility(View.GONE);
-            cv.setVisibility(View.GONE);
-            ed.setVisibility(View.GONE);
-            noGps.setVisibility(View.VISIBLE);
+        if(sharedPrefPresent()) {
+            loadFromSharedPref();
+            initGUI();
         }
-        else
-        {
-            postcode.setVisibility(View.VISIBLE);
-            cv.setVisibility(View.VISIBLE);
-            ed.setVisibility(View.VISIBLE);
-            noGps.setVisibility(View.GONE);
-        }
+
     }
 
     @Override
@@ -103,24 +119,18 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
         // establish a service connection to Google Play services.
         System.out.println("onConnected:" + bundle);
         mShouldResolve = false;
-
-        // Show the signed-in UI
-        //showSignedInUI();
-        //Toast.makeText(getApplicationContext(), getString(R.string.ingelogd), Toast.LENGTH_SHORT).show();
-
         isSignedIn = true;
 
         //set de button naar 'uitloggen'
-        SignInButton signInButton = (SignInButton) this.findViewById(R.id.sign_in_button);
-        // Find the TextView that is inside of the SignInButton and set its text
-        for (int i = 0; i < signInButton.getChildCount(); i++) {
-            View v = signInButton.getChildAt(i);
+        this.changePlusButton();
+        Toast.makeText(getApplicationContext(), getString(R.string.ingelogd), Toast.LENGTH_SHORT).show();
 
-            if (v instanceof TextView) {
-                TextView tv = (TextView) v;
-                tv.setText(getString(R.string.uitloggen));
-                return;
-            }
+        Plus.PeopleApi.loadVisible(mGoogleApiClient, null).setResultCallback(this);
+
+        String personEmail =Plus.AccountApi.getAccountName(mGoogleApiClient);
+        Person p = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+        if (p != null) {
+            String personName = p.getDisplayName();
         }
 
     }
@@ -129,12 +139,6 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
     public void onConnectionSuspended(int i) {
 
     }
-
-    /* Is there a ConnectionResult resolution in progress? */
-    private boolean mIsResolving = false;
-
-    /* Should we automatically resolve ConnectionResults when possible? */
-    private boolean mShouldResolve = false;
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
@@ -168,15 +172,13 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
     }
 
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
     }
 
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         super.onStop();
         mGoogleApiClient.disconnect();
     }
@@ -191,45 +193,6 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
         if(isSignedIn)
         {
             onSignOutClicked();
-        }
-
-
-    }
-
-    public void onSignInClicked(){
-        // User clicked the sign-in button, so begin the sign-in process and automatically
-        // attempt to resolve any errors that occur.
-        mShouldResolve = true;
-        mGoogleApiClient.connect();
-
-        // Show a message to the user that we are signing in.
-        //mStatusTextView.setText(R.string.signing_in);
-        //Toast.makeText(getApplicationContext(), "signing in", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onSignOutClicked()
-    {
-        if (mGoogleApiClient.isConnected()) {
-            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-            mGoogleApiClient.disconnect();
-        }
-
-
-        //Toast.makeText(getApplicationContext(), "signed out ", Toast.LENGTH_SHORT).show();
-        isSignedIn = false;
-
-
-        //set de button naar 'inloggen'
-        SignInButton signInButton = (SignInButton) this.findViewById(R.id.sign_in_button);
-        // Find the TextView that is inside of the SignInButton and set its text
-        for (int i = 0; i < signInButton.getChildCount(); i++) {
-            View v = signInButton.getChildAt(i);
-
-            if (v instanceof TextView) {
-                TextView tv = (TextView) v;
-                tv.setText(getString(R.string.inloggen));
-                return;
-            }
         }
 
 
@@ -260,5 +223,122 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResult(People.LoadPeopleResult peopleData) {
+
+        if (peopleData.getStatus().getStatusCode() == CommonStatusCodes.SUCCESS) {
+            PersonBuffer personBuffer = peopleData.getPersonBuffer();
+            try {
+                int count = personBuffer.getCount();
+                for (int i = 0; i < count; i++) {
+                    System.out.println("Display name: " + personBuffer.get(i).getDisplayName());
+                }
+            } finally {
+                personBuffer.close();
+            }
+        } else {
+            System.out.println("Error requesting visible circles: " + peopleData.getStatus());
+        }
+    }
+
+    public void onSignInClicked(){
+        // User clicked the sign-in button, so begin the sign-in process and automatically
+        // attempt to resolve any errors that occur.
+        mShouldResolve = true;
+        mGoogleApiClient.connect();
+
+        // Show a message to the user that we are signing in.
+    }
+
+    public void onSignOutClicked() {
+        if (mGoogleApiClient.isConnected()) {
+            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+            mGoogleApiClient.disconnect();
+        }
+        isSignedIn = false;
+
+        //set de button naar 'inloggen'
+        this.changePlusButton();
+
+
+    }
+
+    private void changePlusButton() {
+        SignInButton signInButton = (SignInButton) this.findViewById(R.id.sign_in_button);
+            // Find the TextView that is inside of the SignInButton and set its text
+            for (int i = 0; i < signInButton.getChildCount(); i++) {
+                View v = signInButton.getChildAt(i);
+
+                if (v instanceof TextView) {
+                    TextView tv = (TextView) v;
+
+                    if(this.isSignedIn)
+                        tv.setText(getString(R.string.uitloggen));
+                    else
+                        tv.setText(getString(R.string.inloggen));
+                }
+            }
+    }
+
+    private void locatieInputChanged() {
+        TextView postcode = (TextView) this.findViewById(R.id.tvPostcode);
+        View cv = this.findViewById(R.id.cvPostcode);
+        EditText ed = (EditText) this.findViewById(R.id.etPostcode);
+        TextView noGps = (TextView) this.findViewById(R.id.tvNoGps);
+
+        if(postcodeHidden)
+        {
+            postcode.setVisibility(View.GONE);
+            cv.setVisibility(View.GONE);
+            ed.setVisibility(View.GONE);
+            noGps.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            postcode.setVisibility(View.VISIBLE);
+            cv.setVisibility(View.VISIBLE);
+            ed.setVisibility(View.VISIBLE);
+            noGps.setVisibility(View.GONE);
+        }
+    }
+
+    private boolean sharedPrefPresent() {
+        SharedPreferences prefs = this.getSharedPreferences("smpt.proftaak.ggd", Context.MODE_PRIVATE);
+
+        String email = prefs.getString(getString(R.string.sharedpref_number), "");
+        if(email.equals(""))
+            return false;
+        else
+            return true;
+    }
+
+    private void loadFromSharedPref() {
+        SharedPreferences prefs = this.getSharedPreferences("smpt.proftaak.ggd", Context.MODE_PRIVATE);
+
+        String email = prefs.getString(getString(R.string.sharedpref_email), "");
+        String name = prefs.getString(getString(R.string.sharedpref_name), "");
+        String postcode = prefs.getString(getString(R.string.sharedpref_postcode), "");
+        String number = prefs.getString(getString(R.string.sharedpref_number), "");
+
+        thisUser = new User(name, email, postcode, number);
+
+    }
+
+    private void saveToSharedPref(String number, String postcode){
+        SharedPreferences prefs = this.getSharedPreferences("smpt.proftaak.ggd", Context.MODE_PRIVATE);
+        prefs.edit().putString(getString(R.string.sharedpref_number), number).apply();
+
+        if(postcode != null)
+        prefs.edit().putString(getString(R.string.sharedpref_postcode), postcode).apply();
+
+    }
+
+    private void initGUI() {
+        if(thisUser !=null){
+            EditText etNumber = (EditText) this.findViewById(R.id.etNumber);
+            etNumber.setText(thisUser.getNumber());
+        }
     }
 }

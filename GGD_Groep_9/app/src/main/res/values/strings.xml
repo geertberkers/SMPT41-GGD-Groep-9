@@ -21,6 +21,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="inloggen">inloggen</string>
     <string name="uitloggen">uitloggen</string>
-    <string name="ingelogd">Ingelogd met Google+</string>
+    <string name="ingelogd">Ingelogd met Google +</string>
     <string name="uitgelogd">Uitgelogd</string>
+
+    <string name="sharedpref.email">email</string>
+    <string name="sharedpref.name">name</string>
+    <string name="sharedpref.number">number</string>
+    <string name="sharedpref.postcode">postcode</string>
 </resources>
