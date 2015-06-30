@@ -34,18 +34,11 @@ public class TijdlijnFragment extends ListFragment {
         listView = (ListView) getView().findViewById(android.R.id.list);
 
         populateTijdlijnItems();
-
-        for (TijdlijnItem i: tijdlijnItems)
-        {
-            i.revokeAnimationPermission();
-        }
-
-        adapter = new TijdlijnAdapter(getActivity(),tijdlijnItems);
-        setListAdapter(adapter);
     }
 
     private void populateTijdlijnItems()
     {
+        //TODO: Replace static id by id from clicked ramp
         APICallTask apiTest = new APICallTask(this, APICallType.GET_TIJDLIJN, "http://stanjan.nl/smpt/API/nieuws.php?id=1");
         apiTest.execute();
     }
@@ -99,5 +92,8 @@ public class TijdlijnFragment extends ListFragment {
         //Execute when JSON data is retrieved
         JSONParser parser = new JSONParser(data);
         tijdlijnItems = parser.getTijdlijnItems();
+
+        adapter = new TijdlijnAdapter(getActivity(),tijdlijnItems);
+        setListAdapter(adapter);
     }
 }

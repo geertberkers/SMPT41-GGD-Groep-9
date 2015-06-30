@@ -69,7 +69,7 @@ public class JSONParser
                 resultVragen.add(newVraag);
             }
         }
-        catch(Exception ex)
+        catch(JSONException ex)
         {
             ex.printStackTrace();
         }
@@ -81,6 +81,38 @@ public class JSONParser
 
     public ArrayList<TijdlijnItem> getTijdlijnItems()
     {
-        return new ArrayList<>();
+        ArrayList<TijdlijnItem> result = new ArrayList<>();
+        try
+        {
+            JSONArray rootArray = new JSONArray(jsonString);
+            for (int i = 0; i < rootArray.length(); i++)
+            {
+                //prepare tijdlijnitem variables
+                String itemTitle = "";
+                String itemImgSrc = "";
+                String itemTimestamp = "";
+                String itemDescription = "";
+                JSONObject currentItem = rootArray.getJSONObject(i);
+
+                itemTitle = currentItem.getString("titel");
+                itemImgSrc = currentItem.getString("afbeelding");
+                itemTimestamp = currentItem.getString("tijdstip").substring(11, 16);
+                itemDescription = currentItem.getString("beschrijving");
+
+                //Add new item to list to return
+                TijdlijnItem newTijdlijnItem = new TijdlijnItem(itemTitle, itemImgSrc, itemTimestamp, itemDescription);
+
+                //revoke animation because item is loaded on fragment entrance
+                newTijdlijnItem.revokeAnimationPermission();
+
+                result.add(newTijdlijnItem);
+            }
+        }
+        catch (JSONException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return result;
     }
 }
