@@ -35,7 +35,7 @@ import com.google.android.gms.plus.model.people.PersonBuffer;
  * Created by BartKneepkens on 25/06/15.
  */
 
-public class settingsActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
+public class settingsActivity extends BaseActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener, ResultCallback<People.LoadPeopleResult> {
 
     boolean postcodeHidden = true;
@@ -52,7 +52,7 @@ public class settingsActivity extends ActionBarActivity implements GoogleApiClie
     private boolean mShouldResolve = false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
 
