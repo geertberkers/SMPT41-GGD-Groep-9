@@ -51,7 +51,7 @@
     </LinearLayout>
 
     <View
-        style="@style/buttonBackground"
+        android:id="@+id/buttonBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/linearButton"
