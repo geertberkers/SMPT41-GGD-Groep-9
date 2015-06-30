@@ -78,4 +78,9 @@ public class JSONParser
         Vragenlijst result = new Vragenlijst(resultId, resultTijdstip, resultVragen);
         return result;
     }
+
+    public ArrayList<TijdlijnItem> getTijdlijnItems()
+    {
+        return new ArrayList<>();
+    }
 }
