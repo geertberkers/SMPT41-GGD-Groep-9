@@ -17,11 +17,11 @@ import java.net.URLConnection;
 public class APICallTask extends AsyncTask<String, Void, String>
 {
 
-    private Fragment parent;
+    private Object parent;
     private APICallType callType;
     private String apiUrl;
 
-    public APICallTask(Fragment parent, APICallType callType, String apiUrl)
+    public APICallTask(Object parent, APICallType callType, String apiUrl)
     {
         this.parent = parent;
         this.callType = callType;
@@ -65,7 +65,8 @@ public class APICallTask extends AsyncTask<String, Void, String>
     }
 
     @Override
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(String result)
+    {
         TijdlijnFragment t = (TijdlijnFragment)parent;
         t.setData(result);
     }

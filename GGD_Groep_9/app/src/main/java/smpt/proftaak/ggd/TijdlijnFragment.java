@@ -1,6 +1,7 @@
 package smpt.proftaak.ggd;
 
 import android.app.ListFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -82,6 +83,7 @@ public class TijdlijnFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Intent vragenlijstIntent = new Intent(v.getContext(), VragenlijstActivity.class);
+        vragenlijstIntent.putExtra("ramp", ramp);
         v.getContext().startActivity(vragenlijstIntent);
     }
 

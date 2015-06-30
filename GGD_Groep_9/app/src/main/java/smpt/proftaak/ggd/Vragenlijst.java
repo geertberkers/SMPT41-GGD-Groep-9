@@ -1,6 +1,7 @@
 package smpt.proftaak.ggd;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by Joep on 30-6-2015.
@@ -28,5 +29,20 @@ public class Vragenlijst
 
     public ArrayList<Vraag> getVragen() {
         return vragen;
+    }
+
+    public Map<Integer,String> getSymptoomVragen()
+    {
+        ArrayList<String> result = new ArrayList<>();
+
+        for (Vraag current: vragen)
+        {
+            if (current.getSoort() == "symptoom")
+            {
+                return current.getSymptomen();
+            }
+        }
+
+        return null;
     }
 }
