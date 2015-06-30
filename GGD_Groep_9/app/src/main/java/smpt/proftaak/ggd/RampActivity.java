@@ -62,11 +62,13 @@ public class RampActivity extends BaseActivity {
 
 
         tijdlijnFragment = new TijdlijnFragment();
+
         informatieFragment = new InformatieFragment();
 
         fragmentManager = getFragmentManager();
 
         informatieFragment.setArguments(bundle);
+        tijdlijnFragment.setArguments(bundle);
 
         //AANZETTEN OM TIJDLIJN FRAGMENT TE TESTEN
         if (getFragmentManager().findFragmentById(android.R.id.content) == null) {

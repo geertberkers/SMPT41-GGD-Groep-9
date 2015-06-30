@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -19,6 +22,7 @@ public class TijdlijnFragment extends ListFragment {
     private ListView listView;
     private TijdlijnAdapter adapter;
     private ArrayList<TijdlijnItem> tijdlijnItems;
+    private Ramp ramp;
 
     public TijdlijnFragment() {
 
@@ -34,19 +38,11 @@ public class TijdlijnFragment extends ListFragment {
         listView = (ListView) getView().findViewById(android.R.id.list);
 
         populateTijdlijnItems();
-
-        for (TijdlijnItem i: tijdlijnItems)
-        {
-            i.revokeAnimationPermission();
-        }
-
-        adapter = new TijdlijnAdapter(getActivity(),tijdlijnItems);
-        setListAdapter(adapter);
     }
 
     private void populateTijdlijnItems()
     {
-        APICallTask apiTest = new APICallTask(this, APICallType.GET_TIJDLIJN, "http://stanjan.nl/smpt/API/nieuws.php?id=1");
+        APICallTask apiTest = new APICallTask(this, APICallType.GET_TIJDLIJN, "http://stanjan.nl/smpt/API/nieuws.php?id=" + ramp.getID());
         apiTest.execute();
     }
 
@@ -91,6 +87,7 @@ public class TijdlijnFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ramp = this.getArguments().getParcelable("ramp");
         return inflater.inflate(R.layout.tijdlijn_fragment, container, false);
     }
 
@@ -99,5 +96,15 @@ public class TijdlijnFragment extends ListFragment {
         //Execute when JSON data is retrieved
         JSONParser parser = new JSONParser(data);
         tijdlijnItems = parser.getTijdlijnItems();
+
+        //Geef een melding als er nog geen nieuws beschikbaar is
+        if (tijdlijnItems.size() == 0)
+        {
+            tijdlijnItems.add(new TijdlijnItem("Er is op dit moment geen nieuws beschikbaar", "", new SimpleDateFormat("HH:mm").format(new Date()), "Probeer het later opnieuw."));
+            tijdlijnItems.get(0).revokeAnimationPermission();
+        }
+
+        adapter = new TijdlijnAdapter(getActivity(),tijdlijnItems);
+        setListAdapter(adapter);
     }
 }

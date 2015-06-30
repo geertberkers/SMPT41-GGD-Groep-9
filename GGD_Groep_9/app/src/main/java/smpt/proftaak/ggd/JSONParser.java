@@ -1,16 +1,8 @@
 package smpt.proftaak.ggd;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -70,17 +62,52 @@ public class JSONParser {
                 Vraag newVraag = new Vraag(vraagId, vraagSoort, vraag, vraagSymptomen);
                 resultVragen.add(newVraag);
             }
-        } catch (Exception ex) {
+
+        }
+        catch(JSONException ex)
+        {
             ex.printStackTrace();
         }
 
-        //return vragenlijst
-        Vragenlijst result = new Vragenlijst(resultId, resultTijdstip, resultVragen);
-        return result;
+        // Return vragenlijst
+        return new Vragenlijst(resultId, resultTijdstip, resultVragen);
     }
 
-    public ArrayList<TijdlijnItem> getTijdlijnItems() {
-        return new ArrayList<>();
+    public ArrayList<TijdlijnItem> getTijdlijnItems()
+    {
+        ArrayList<TijdlijnItem> result = new ArrayList<>();
+        try
+        {
+            JSONArray rootArray = new JSONArray(jsonString);
+            for (int i = 0; i < rootArray.length(); i++)
+            {
+                //prepare tijdlijnitem variables
+                String itemTitle = "";
+                String itemImgSrc = "";
+                String itemTimestamp = "";
+                String itemDescription = "";
+                JSONObject currentItem = rootArray.getJSONObject(i);
+
+                itemTitle = currentItem.getString("titel");
+                itemImgSrc = currentItem.getString("afbeelding");
+                itemTimestamp = currentItem.getString("tijdstip").substring(11, 16);
+                itemDescription = currentItem.getString("beschrijving");
+
+                //Add new item to list to return
+                TijdlijnItem newTijdlijnItem = new TijdlijnItem(itemTitle, itemImgSrc, itemTimestamp, itemDescription);
+
+                //revoke animation because item is loaded on fragment entrance
+                newTijdlijnItem.revokeAnimationPermission();
+
+                result.add(newTijdlijnItem);
+            }
+        }
+        catch (JSONException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return result;
     }
 
     public Informatie getInformatie() {
