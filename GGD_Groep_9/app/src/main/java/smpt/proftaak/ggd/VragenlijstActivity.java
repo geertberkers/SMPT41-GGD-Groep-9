@@ -79,7 +79,7 @@ public class VragenlijstActivity extends BaseActivity {
 
         if (vragenlijst.getId() == -1)
         {
-            Toast.makeText(this, "Er is op dit moment geen vragenlijst beschikbaar voor deze situatie.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Er is op dit moment geen vragenlijst beschikbaar voor deze situatie.", Toast.LENGTH_SHORT).show();
             finish();
         }
 
@@ -98,18 +98,32 @@ public class VragenlijstActivity extends BaseActivity {
             symptomenTitle.setVisibility(View.GONE);
         }
 
-        VragenlijstSymptomenAdapter adapter = new VragenlijstSymptomenAdapter(this, symptomen);
-        ListView list = (ListView)findViewById(R.id.vragenlijstSymptomen);
-        list.setAdapter(adapter);
-        setListViewHeightBasedOnChildren(list);
+        VragenlijstSymptomenAdapter symptomenAdapter = new VragenlijstSymptomenAdapter(this, symptomen);
+        ListView symptomenList = (ListView)findViewById(R.id.vragenlijstSymptomen);
+        symptomenList.setAdapter(symptomenAdapter);
+        setListViewHeightBasedOnChildren(symptomenList);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        symptomenList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toggle checkbox on row click
-                CheckBox symptoomCheck = (CheckBox)view.findViewById(R.id.symptoomCheck);
+                CheckBox symptoomCheck = (CheckBox) view.findViewById(R.id.symptoomCheck);
                 symptoomCheck.toggle();
             }
         });
+
+        ArrayList<Vraag> openVragen = new ArrayList<>();
+        for (Vraag current: vragenlijst.getVragen())
+        {
+            if (current.getSoort().equals("open"))
+            {
+                openVragen.add(current);
+            }
+        }
+
+        VragenlijstOpenVragenAdapter openAdapter = new VragenlijstOpenVragenAdapter(this, openVragen);
+        ListView openvragenList = (ListView)findViewById(R.id.vragenlijstOpenVragen);
+        openvragenList.setAdapter(openAdapter);
+        setListViewHeightBasedOnChildren(openvragenList);
     }
 }
