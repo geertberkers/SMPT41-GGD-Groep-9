@@ -8,41 +8,36 @@ import android.os.Parcelable;
  */
 public class Ramp implements Parcelable{
 
+    private int id;
     private String titelRamp;
     private String laatsteUpdate;
     private String omschrijving;
 
-    public Ramp(String titelRamp, String laatsteUpdate, String omschrijving) {
+    public Ramp(int id, String titelRamp, String laatsteUpdate, String omschrijving) {
+        this.id = id;
         this.titelRamp = titelRamp;
         this.laatsteUpdate = laatsteUpdate;
         this.omschrijving = omschrijving;
+    }
+
+    public int getID() {
+        return id;
     }
 
     public String getTitelRamp() {
         return titelRamp;
     }
 
-    public void setTitelRamp(String titelRamp) {
-        this.titelRamp = titelRamp;
-    }
-
     public String getLaatsteUpdate() {
         return laatsteUpdate;
-    }
-
-    public void setLaatsteUpdate(String laatsteUpdate) {
-        this.laatsteUpdate = laatsteUpdate;
     }
 
     public String getOmschrijving() {
         return omschrijving;
     }
 
-    public void setOmschrijving(String omschrijving) {
-        this.omschrijving = omschrijving;
-    }
-
     public Ramp(Parcel read){
+        this.id = read.readInt();
         this.titelRamp = read.readString();
         this.laatsteUpdate = read.readString();
         this.omschrijving = read.readString();
@@ -69,8 +64,10 @@ public class Ramp implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel arg0, int arg1) {
+        arg0.writeInt(id);
         arg0.writeString(titelRamp);
         arg0.writeString(laatsteUpdate);
         arg0.writeString(omschrijving);
     }
+
 }
