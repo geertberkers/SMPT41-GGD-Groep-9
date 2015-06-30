@@ -10,9 +10,18 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 
+import org.json.JSONException;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ExecutionException;
 
 public class TijdlijnFragment extends ListFragment {
 
@@ -80,6 +89,7 @@ public class TijdlijnFragment extends ListFragment {
 
         //voeg 1 nieuw item toe
         timer.schedule(addNewItemTask, 1500);
+        testAPI();
     }
 
     @Override
@@ -91,5 +101,24 @@ public class TijdlijnFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.tijdlijn_fragment, container, false);
+    }
+
+    private void testAPI()
+    {
+        APICallTask apiTest = new APICallTask(this);
+        String result;
+        try {
+            result = apiTest.execute("http://stanjan.nl/smpt/API/vragen.php?id=1").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setData(String data)
+    {
+        JSONParser parser = new JSONParser(data);
+        parser.getVragenlijst();
     }
 }
