@@ -97,6 +97,13 @@ public class TijdlijnFragment extends ListFragment {
         JSONParser parser = new JSONParser(data);
         tijdlijnItems = parser.getTijdlijnItems();
 
+        //Geef een melding als er nog geen nieuws beschikbaar is
+        if (tijdlijnItems.size() == 0)
+        {
+            tijdlijnItems.add(new TijdlijnItem("Er is op dit moment geen nieuws beschikbaar", "", new SimpleDateFormat("HH:mm").format(new Date()), "Probeer het later opnieuw."));
+            tijdlijnItems.get(0).revokeAnimationPermission();
+        }
+
         adapter = new TijdlijnAdapter(getActivity(),tijdlijnItems);
         setListAdapter(adapter);
     }
