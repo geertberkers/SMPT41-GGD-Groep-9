@@ -60,6 +60,7 @@
             android:name=".VragenlijstActivity"
             android:label="@string/title_activity_vragenlijst"
             android:configChanges="orientation"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait">
         </activity>
 

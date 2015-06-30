@@ -72,12 +72,13 @@ public class APICallTask extends AsyncTask<String, Void, String>
                 t.setData(result);
                 break;
             case GET_VRAGENLIJST:
+                VragenlijstActivity v = (VragenlijstActivity)parent;
+                v.setData(result);
                 break;
             case GET_INFORMATIE:
                 InformatieFragment i = (InformatieFragment)parent;
                 i.setData(result);
                 break;
-
         }
     }
 }

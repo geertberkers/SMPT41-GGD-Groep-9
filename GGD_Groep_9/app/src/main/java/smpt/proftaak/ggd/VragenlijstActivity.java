@@ -9,7 +9,11 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -73,11 +77,25 @@ public class VragenlijstActivity extends BaseActivity {
         JSONParser parser = new JSONParser(data);
         vragenlijst = parser.getVragenlijst();
 
+        if (vragenlijst.getId() == -1)
+        {
+            Toast.makeText(this, "Er is op dit moment geen vragenlijst beschikbaar voor deze situatie.", Toast.LENGTH_LONG).show();
+            finish();
+        }
+
         ArrayList<String> symptomen = new ArrayList<>();
 
-        for (Map.Entry<Integer, String> current: vragenlijst.getSymptoomVragen().entrySet())
+        if (vragenlijst.getSymptoomVragen() != null)
         {
-            symptomen.add(current.getValue());
+            for (Map.Entry<Integer, String> current: vragenlijst.getSymptoomVragen().entrySet())
+            {
+                symptomen.add(current.getValue());
+            }
+        }
+        else
+        {
+            TextView symptomenTitle = (TextView)findViewById(R.id.vragenlijstTitle);
+            symptomenTitle.setVisibility(View.GONE);
         }
 
         VragenlijstSymptomenAdapter adapter = new VragenlijstSymptomenAdapter(this, symptomen);

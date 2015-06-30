@@ -13,6 +13,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/vragenlijstTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/vragenlijstStyle.Title"

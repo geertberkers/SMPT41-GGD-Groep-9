@@ -37,7 +37,7 @@ public class Vragenlijst
 
         for (Vraag current: vragen)
         {
-            if (current.getSoort() == "symptoom")
+            if (current.getSoort().equals("symptoom"))
             {
                 return current.getSymptomen();
             }
