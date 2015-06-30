@@ -65,7 +65,6 @@ public class InformatieFragment extends Fragment {
             setInformation();
         }
 
-        // TODO: POSTCODE OPVRAGEN!
         SharedPreferences prefs = getActivity().getSharedPreferences("smpt.proftaak.ggd", Context.MODE_PRIVATE);
         String postcode = prefs.getString(getString(R.string.sharedpref_postcode), "5616NH");
         System.out.println("Postcode: " + postcode);

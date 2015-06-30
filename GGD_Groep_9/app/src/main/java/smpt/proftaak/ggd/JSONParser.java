@@ -73,8 +73,7 @@ public class JSONParser {
         return new Vragenlijst(resultId, resultTijdstip, resultVragen);
     }
 
-    public ArrayList<TijdlijnItem> getTijdlijnItems()
-    {
+    public ArrayList<TijdlijnItem> getTijdlijnItems() {
         ArrayList<TijdlijnItem> result = new ArrayList<>();
         try
         {
