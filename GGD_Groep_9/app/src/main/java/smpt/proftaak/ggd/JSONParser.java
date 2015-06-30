@@ -1,9 +1,16 @@
 package smpt.proftaak.ggd;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,12 +18,10 @@ import java.util.Map;
 /**
  * Created by Joep on 30-6-2015.
  */
-public class JSONParser
-{
+public class JSONParser {
     private String jsonString;
 
-    public JSONParser(String jsonString)
-    {
+    public JSONParser(String jsonString) {
         this.jsonString = jsonString;
     }
 
@@ -30,7 +35,7 @@ public class JSONParser
         try {
             //init root object
             JSONArray rootArray = new JSONArray(jsonString);
-            JSONObject jsonObject = (JSONObject)rootArray.get(0);
+            JSONObject jsonObject = (JSONObject) rootArray.get(0);
 
             //get vragenlijst info
             resultId = jsonObject.getInt("id");
@@ -38,8 +43,7 @@ public class JSONParser
 
             //get vragen
             JSONArray vragenArray = jsonObject.getJSONArray("vragen");
-            for (int i = 0; i < vragenArray.length(); i++)
-            {
+            for (int i = 0; i < vragenArray.length(); i++) {
                 //init vraag variables
                 int vraagId = -1;
                 String vraagSoort = "";
@@ -53,11 +57,9 @@ public class JSONParser
                 vraag = currentVraag.getString("vraag");
 
                 //get symptomen
-                if (currentVraag.has("symptomen"))
-                {
+                if (currentVraag.has("symptomen")) {
                     JSONArray symptomenArray = currentVraag.getJSONArray("symptomen");
-                    for (int j = 0; j < symptomenArray.length(); j++)
-                    {
+                    for (int j = 0; j < symptomenArray.length(); j++) {
                         //get info for each symptoom
                         JSONObject currentSymptoom = symptomenArray.getJSONObject(j);
                         vraagSymptomen.put(currentSymptoom.getInt("id"), currentSymptoom.getString("symptoom"));
@@ -68,9 +70,7 @@ public class JSONParser
                 Vraag newVraag = new Vraag(vraagId, vraagSoort, vraag, vraagSymptomen);
                 resultVragen.add(newVraag);
             }
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -79,8 +79,27 @@ public class JSONParser
         return result;
     }
 
-    public ArrayList<TijdlijnItem> getTijdlijnItems()
-    {
+    public ArrayList<TijdlijnItem> getTijdlijnItems() {
         return new ArrayList<>();
+    }
+
+    public Informatie getInformatie() {
+
+        try {
+            JSONArray rootArray = new JSONArray(jsonString);
+            JSONObject jsonObject = (JSONObject) rootArray.get(0);
+
+            String titel = jsonObject.getString("titel");
+            String beschrijving = jsonObject.getString("beschrijving");
+            String afbeelding = jsonObject.getString("afbeelding");
+            String tijdstip = jsonObject.getString("tijdstip");
+
+            return new Informatie(titel, beschrijving, afbeelding, tijdstip);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 }
