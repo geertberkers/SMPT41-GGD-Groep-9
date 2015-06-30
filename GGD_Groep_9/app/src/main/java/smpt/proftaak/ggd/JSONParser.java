@@ -17,6 +17,33 @@ public class JSONParser {
         this.jsonString = jsonString;
     }
 
+    public ArrayList<Ramp> getRampen() {
+
+        ArrayList<Ramp> resultRampen = new ArrayList<>();
+
+        try {
+            JSONArray rootArray = new JSONArray(jsonString);
+
+            for(int i = 0; i<rootArray.length();i++)
+            {
+                JSONObject jsonObject = (JSONObject) rootArray.get(i);
+
+                int id = jsonObject.getInt("id");
+                String naam = jsonObject.getString("naam");
+                String beschrijving = jsonObject.getString("beschrijving");
+                String begintijd = jsonObject.getString("begintijd");
+
+                resultRampen.add(new Ramp(id,naam,beschrijving,begintijd));
+            }
+        }
+        catch(JSONException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return resultRampen;
+    }
+
     public Vragenlijst getVragenlijst() {
         //init vragenlijst variables
         int resultId = -1;
