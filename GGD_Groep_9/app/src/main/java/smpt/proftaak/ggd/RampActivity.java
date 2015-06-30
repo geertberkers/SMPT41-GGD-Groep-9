@@ -30,6 +30,7 @@ public class RampActivity extends BaseActivity {
 
     private Ramp ramp;
 
+    private View buttonBackground;
     private Button btnTijdlijn;
     private Button btnInformatie;
     private Fragment tijdlijnFragment;
@@ -44,9 +45,9 @@ public class RampActivity extends BaseActivity {
 
         btnTijdlijn = (Button) findViewById(R.id.btnTijdlijn);
         btnInformatie = (Button) findViewById(R.id.btnInformatie);
+        buttonBackground = findViewById(R.id.buttonBackground);
 
-        //btnInformatie.setBackground(getResources().getDrawable(R.drawable.info_button));
-        //btnTijdlijn.setBackground(getResources().getDrawable(R.drawable.tijdlijn_button_selected));
+        buttonBackground.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.blue_button_background_timeline));
 
         Bundle b = getIntent().getExtras();
         ramp = b.getParcelable("ramp");
@@ -114,6 +115,7 @@ public class RampActivity extends BaseActivity {
 
         switch (view.getId()) {
             case R.id.btnTijdlijn:
+                buttonBackground.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.blue_button_background_timeline));
                 btnTijdlijn.setTextColor(getResources().getColor(R.color.zwart));
                 btnInformatie.setTextColor(getResources().getColor(R.color.lichteGrijs));
                 fragmentTransaction = fragmentManager.beginTransaction();
@@ -122,6 +124,7 @@ public class RampActivity extends BaseActivity {
                 fragmentTransaction.commit();
                 break;
             case R.id.btnInformatie:
+                buttonBackground.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.blue_button_background_information));
                 btnInformatie.setTextColor(getResources().getColor(R.color.zwart));
                 btnTijdlijn.setTextColor(getResources().getColor(R.color.lichteGrijs));
                 fragmentTransaction = fragmentManager.beginTransaction();
