@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -19,6 +22,7 @@ public class TijdlijnFragment extends ListFragment {
     private ListView listView;
     private TijdlijnAdapter adapter;
     private ArrayList<TijdlijnItem> tijdlijnItems;
+    private Ramp ramp;
 
     public TijdlijnFragment() {
 
@@ -38,8 +42,7 @@ public class TijdlijnFragment extends ListFragment {
 
     private void populateTijdlijnItems()
     {
-        //TODO: Replace static id by id from clicked ramp
-        APICallTask apiTest = new APICallTask(this, APICallType.GET_TIJDLIJN, "http://stanjan.nl/smpt/API/nieuws.php?id=1");
+        APICallTask apiTest = new APICallTask(this, APICallType.GET_TIJDLIJN, "http://stanjan.nl/smpt/API/nieuws.php?id=" + ramp.getID());
         apiTest.execute();
     }
 
@@ -84,6 +87,7 @@ public class TijdlijnFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ramp = this.getArguments().getParcelable("ramp");
         return inflater.inflate(R.layout.tijdlijn_fragment, container, false);
     }
 
