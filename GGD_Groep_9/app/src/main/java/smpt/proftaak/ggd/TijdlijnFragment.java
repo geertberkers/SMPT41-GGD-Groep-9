@@ -105,15 +105,9 @@ public class TijdlijnFragment extends ListFragment {
 
     private void testAPI()
     {
-        APICallTask apiTest = new APICallTask(this);
+        APICallTask apiTest = new APICallTask(this, APICallType.GET_VRAGENLIJST, "http://stanjan.nl/smpt/API/vragen.php?id=1");
         String result;
-        try {
-            result = apiTest.execute("http://stanjan.nl/smpt/API/vragen.php?id=1").get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        apiTest.execute();
     }
 
     public void setData(String data)

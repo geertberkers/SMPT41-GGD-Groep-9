@@ -18,23 +18,26 @@ public class APICallTask extends AsyncTask<String, Void, String>
 {
 
     private Fragment parent;
+    private APICallType callType;
+    private String apiUrl;
 
-    public APICallTask(Fragment parent)
+    public APICallTask(Fragment parent, APICallType callType, String apiUrl)
     {
         this.parent = parent;
+        this.callType = callType;
+        this.apiUrl = apiUrl;
     }
 
     @Override
     protected String doInBackground(String... strings) {
-        String urlString = strings[0];
         URL url;
         try
         {
-            url = new URL(urlString);
+            url = new URL(apiUrl);
         }
         catch (MalformedURLException ex)
         {
-            throw new RuntimeException("URL " + urlString + " is malformed");
+            throw new RuntimeException("URL " + apiUrl + " is malformed");
         }
 
         String result = "";
