@@ -56,10 +56,6 @@ public class settingsActivity extends BaseActivity implements GoogleApiClient.Co
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.oceaanblauw)));
-
         Switch gpsSwitch = (Switch) this.findViewById(R.id.gpsSwitch);
         gpsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -73,9 +69,6 @@ public class settingsActivity extends BaseActivity implements GoogleApiClient.Co
             }
         });
 
-
-
-
         // Build GoogleApiClient with access to basic profile
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -83,7 +76,6 @@ public class settingsActivity extends BaseActivity implements GoogleApiClient.Co
                 .addApi(Plus.API)
                 .addScope(new Scope(Scopes.PROFILE))
                 .build();
-
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
 
@@ -118,14 +110,10 @@ public class settingsActivity extends BaseActivity implements GoogleApiClient.Co
             }
         });
 
-
-
-
         if(sharedPrefPresent()) {
             loadFromSharedPref();
             initGUI();
         }
-
     }
 
     @Override
@@ -210,8 +198,6 @@ public class settingsActivity extends BaseActivity implements GoogleApiClient.Co
         {
             onSignOutClicked();
         }
-
-
     }
 
     @Override
