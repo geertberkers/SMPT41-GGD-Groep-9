@@ -63,7 +63,7 @@ public class InformatieFragment extends Fragment {
 
         try {
             String url = "http://stanjan.nl/smpt/images/info/" + info.getAfbeeldingPath();
-            System.out.println(url);
+            System.out.println("afbeeldingsPath: " + url);
             Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(url).getContent());
             imgWarning.setImageBitmap(bitmap);
         } catch (MalformedURLException e) {
