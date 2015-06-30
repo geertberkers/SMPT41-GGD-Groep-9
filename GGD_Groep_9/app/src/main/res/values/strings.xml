@@ -28,4 +28,8 @@
     <string name="sharedpref.name">name</string>
     <string name="sharedpref.number">number</string>
     <string name="sharedpref.postcode">postcode</string>
+
+    <string name="GCM.SenderKey">AIzaSyAHg-HHynCNnlDAGvz1sTaddG1CHvl5dZ0</string>
+    <string name="GCM.projectNumber">470802811085</string>
+    <string name="GCM.url">nada</string>
 </resources>
