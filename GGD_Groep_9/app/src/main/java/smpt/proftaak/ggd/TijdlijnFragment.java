@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,8 +33,7 @@ public class TijdlijnFragment extends ListFragment {
 
         listView = (ListView) getView().findViewById(android.R.id.list);
 
-        Bundle bundle = this.getArguments();
-        this.tijdlijnItems = bundle.getParcelableArrayList("tijdlijnItems");
+        populateTijdlijnItems();
 
         for (TijdlijnItem i: tijdlijnItems)
         {
@@ -45,8 +42,12 @@ public class TijdlijnFragment extends ListFragment {
 
         adapter = new TijdlijnAdapter(getActivity(),tijdlijnItems);
         setListAdapter(adapter);
+    }
 
-        setUpNewsUpdate();
+    private void populateTijdlijnItems()
+    {
+        APICallTask apiTest = new APICallTask(this, APICallType.GET_TIJDLIJN, "http://stanjan.nl/smpt/API/nieuws.php?id=1");
+        apiTest.execute();
     }
 
     private void setUpNewsUpdate() {
@@ -91,5 +92,12 @@ public class TijdlijnFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.tijdlijn_fragment, container, false);
+    }
+
+    public void setData(String data)
+    {
+        //Execute when JSON data is retrieved
+        JSONParser parser = new JSONParser(data);
+        tijdlijnItems = parser.getTijdlijnItems();
     }
 }

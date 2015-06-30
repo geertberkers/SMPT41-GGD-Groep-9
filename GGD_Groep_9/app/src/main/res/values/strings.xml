@@ -19,6 +19,9 @@
     <string name="sharedpref.name">name</string>
     <string name="sharedpref.number">number</string>
     <string name="sharedpref.postcode">postcode</string>
+    <string name="GCM.SenderKey">AIzaSyAHg-HHynCNnlDAGvz1sTaddG1CHvl5dZ0</string>
+    <string name="GCM.projectNumber">470802811085</string>
+    <string name="GCM.url">nada</string>
 
     <!--Test strings-->
     <string name="lipsum">Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren \'60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</string>
@@ -29,5 +32,4 @@
     <string name="titelInfo">Titel informatie</string>
     <string name="omschrijvingRamp">De brand bij Chemie-Pack breekt uit op woensdagmiddag 5 januari</string>
     <string name="lorum_ipsum"><b>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b>\nMorbi pretium faucibus odio, vel finibus enim porttitor at. Sed massa ex, feugiat ut tincidunt eu, pellentesque id libero. Donec rutrum arcu quis porttitor luctus. Suspendisse sagittis dolor vitae sem suscipit feugiat. Nulla eget sagittis ex. Proin at efficitur magna, porttitor semper odio. Vivamus tempor fringilla dui ut dictum. Vestibulum fringilla nibh vel erat rutrum, vitae bibendum augue posuere. Sed sit amet enim nibh.</string>
-
 </resources>
