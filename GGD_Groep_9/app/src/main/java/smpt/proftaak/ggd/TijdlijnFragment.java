@@ -42,8 +42,6 @@ public class TijdlijnFragment extends ListFragment {
 
         adapter = new TijdlijnAdapter(getActivity(),tijdlijnItems);
         setListAdapter(adapter);
-
-        setUpNewsUpdate();
     }
 
     private void populateTijdlijnItems()
