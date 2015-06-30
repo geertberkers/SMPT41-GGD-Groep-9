@@ -66,7 +66,19 @@ public class APICallTask extends AsyncTask<String, Void, String>
 
     @Override
     protected void onPostExecute(String result) {
-        TijdlijnFragment t = (TijdlijnFragment)parent;
-        t.setData(result);
+        switch(callType) {
+            case GET_TIJDLIJN:
+                TijdlijnFragment t = (TijdlijnFragment)parent;
+                t.setData(result);
+                break;
+            case GET_VRAGENLIJST:
+                break;
+            case GET_INFORMATIE:
+                InformatieFragment i = (InformatieFragment)parent;
+                i.setData(result);
+                break;
+
+        }
+
     }
 }

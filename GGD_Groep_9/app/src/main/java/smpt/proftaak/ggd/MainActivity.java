@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-
 import java.util.ArrayList;
 
 import smpt.proftaak.ggd.GCM.QuickstartPreferences;
@@ -27,8 +26,6 @@ import smpt.proftaak.ggd.GCM.RegistrationIntentService;
 
 public class MainActivity extends BaseActivity {
 
-    private ListView rampenListView;
-    private RampAdapter rampAdapter;
     private ArrayList<Ramp> rampenLijst;
 
     //GCM
@@ -41,17 +38,15 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setIcon(R.mipmap.ic_launcher);
-        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.oceaanblauw)));
-
+        // Dit is testdata
+        // Goede data ophalen uit de database
         rampenLijst = new ArrayList<>();
-        rampenLijst.add(new Ramp("Brand Helmond", "Laatste update: 15:00", "Kleine brand met veel rook"));
-        rampenLijst.add(new Ramp("Brand Eindhoven", "Laatste update: 14:00", "Grote brand en veel overlast"));
-        rampenLijst.add(new Ramp("Brand Veldhoven", "Laatste update: 12:30", "Kleine brand, brandweer ter plekke"));
+        rampenLijst.add(new Ramp(1,"Brand Helmond", "Laatste update: 15:00", "Kleine brand met veel rook"));
+        rampenLijst.add(new Ramp(2,"Brand Eindhoven", "Laatste update: 14:00", "Grote brand en veel overlast"));
+        rampenLijst.add(new Ramp(3,"Brand Veldhoven", "Laatste update: 12:30", "Kleine brand, brandweer ter plekke"));
 
-        rampenListView = (ListView) findViewById(R.id.rampenListview);
-        rampAdapter = new RampAdapter(this.getApplicationContext(), rampenLijst);
+        ListView rampenListView = (ListView) findViewById(R.id.rampenListview);
+        RampAdapter rampAdapter = new RampAdapter(this.getApplicationContext(), rampenLijst);
 
         rampenListView.setAdapter(rampAdapter);
 
@@ -63,8 +58,6 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
-
-
         //GCM
 
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
@@ -88,7 +81,6 @@ public class MainActivity extends BaseActivity {
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
         }
-
     }
 
     @Override
@@ -100,9 +92,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
 
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, settingsActivity.class);
