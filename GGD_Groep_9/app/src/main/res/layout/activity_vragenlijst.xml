@@ -13,6 +13,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/vragenlijstTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/vragenlijstStyle.Title"
@@ -25,19 +26,12 @@
                 android:layout_height="wrap_content">
             </ListView>
 
-            <TextView
+            <ListView
+                android:id="@+id/vragenlijstOpenVragen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Overige symptomen"
-                style="@style/vragenlijstStyle.Title"/>
-
-            <EditText
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Raak aan om te typen..."
-                android:gravity="bottom"/>
+                android:dividerHeight="1dp">
+            </ListView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -9,33 +9,28 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.Map;
 
 public class VragenlijstActivity extends BaseActivity {
 
-    private ArrayList<String> symptomen;
+    private Vragenlijst vragenlijst;
+    private Ramp ramp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vragenlijst);
 
-        symptomen = populateSymptomen();
+        ramp = getIntent().getParcelableExtra("ramp");
 
-        VragenlijstSymptomenAdapter adapter = new VragenlijstSymptomenAdapter(this, symptomen);
-        ListView list = (ListView)findViewById(R.id.vragenlijstSymptomen);
-        list.setAdapter(adapter);
-        setListViewHeightBasedOnChildren(list);
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Toggle checkbox on row click
-                CheckBox symptoomCheck = (CheckBox)view.findViewById(R.id.symptoomCheck);
-                symptoomCheck.toggle();
-            }
-        });
+        APICallTask apiTest = new APICallTask(this, APICallType.GET_VRAGENLIJST, "http://stanjan.nl/smpt/API/vragen.php?id=" + ramp.getID());
+        apiTest.execute();
     }
 
     /**
@@ -58,20 +53,6 @@ public class VragenlijstActivity extends BaseActivity {
         listView.setLayoutParams(params);
     }
 
-    private ArrayList<String> populateSymptomen()
-    {
-        ArrayList<String> TESTDATA = new ArrayList<>();
-        TESTDATA.add("Buik");
-        TESTDATA.add("Hoofd");
-        TESTDATA.add("Hart");
-        TESTDATA.add("Longen");
-        TESTDATA.add("Oren");
-        TESTDATA.add("Ogen");
-
-        return TESTDATA;
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_vragenlijst, menu);
@@ -88,5 +69,61 @@ public class VragenlijstActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setData(String data)
+    {
+        //Execute when JSON data is retrieved
+        JSONParser parser = new JSONParser(data);
+        vragenlijst = parser.getVragenlijst();
+
+        if (vragenlijst.getId() == -1)
+        {
+            Toast.makeText(this, "Er is op dit moment geen vragenlijst beschikbaar voor deze situatie.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+        ArrayList<String> symptomen = new ArrayList<>();
+
+        if (vragenlijst.getSymptoomVragen() != null)
+        {
+            for (Map.Entry<Integer, String> current: vragenlijst.getSymptoomVragen().entrySet())
+            {
+                symptomen.add(current.getValue());
+            }
+        }
+        else
+        {
+            TextView symptomenTitle = (TextView)findViewById(R.id.vragenlijstTitle);
+            symptomenTitle.setVisibility(View.GONE);
+        }
+
+        VragenlijstSymptomenAdapter symptomenAdapter = new VragenlijstSymptomenAdapter(this, symptomen);
+        ListView symptomenList = (ListView)findViewById(R.id.vragenlijstSymptomen);
+        symptomenList.setAdapter(symptomenAdapter);
+        setListViewHeightBasedOnChildren(symptomenList);
+
+        symptomenList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //Toggle checkbox on row click
+                CheckBox symptoomCheck = (CheckBox) view.findViewById(R.id.symptoomCheck);
+                symptoomCheck.toggle();
+            }
+        });
+
+        ArrayList<Vraag> openVragen = new ArrayList<>();
+        for (Vraag current: vragenlijst.getVragen())
+        {
+            if (current.getSoort().equals("open"))
+            {
+                openVragen.add(current);
+            }
+        }
+
+        VragenlijstOpenVragenAdapter openAdapter = new VragenlijstOpenVragenAdapter(this, openVragen);
+        ListView openvragenList = (ListView)findViewById(R.id.vragenlijstOpenVragen);
+        openvragenList.setAdapter(openAdapter);
+        setListViewHeightBasedOnChildren(openvragenList);
     }
 }
