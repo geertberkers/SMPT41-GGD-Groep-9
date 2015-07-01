@@ -60,7 +60,7 @@ public class RegistrationIntentService extends IntentService {
 
                 // TODO: Implement this method to send any registration to your app's servers.
                 sendRegistrationToServer(token);
-
+                
                 // Subscribe to topic channels
                 subscribeTopics(token);
 
