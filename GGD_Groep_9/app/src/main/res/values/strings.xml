@@ -33,4 +33,5 @@
     <string name="laatsteUpdate">Laatste update: 15:00</string>
     <string name="omschrijvingRamp">De brand bij Chemie-Pack breekt uit op woensdagmiddag 5 januari</string>
     <string name="lorum_ipsum"><b>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b>\nMorbi pretium faucibus odio, vel finibus enim porttitor at. Sed massa ex, feugiat ut tincidunt eu, pellentesque id libero. Donec rutrum arcu quis porttitor luctus. Suspendisse sagittis dolor vitae sem suscipit feugiat. Nulla eget sagittis ex. Proin at efficitur magna, porttitor semper odio. Vivamus tempor fringilla dui ut dictum. Vestibulum fringilla nibh vel erat rutrum, vitae bibendum augue posuere. Sed sit amet enim nibh.</string>
+    <string name="fireDescription">Fire</string>
 </resources>

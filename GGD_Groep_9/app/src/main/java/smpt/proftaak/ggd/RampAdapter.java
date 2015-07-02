@@ -1,10 +1,12 @@
 package smpt.proftaak.ggd;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,17 +53,18 @@ public class RampAdapter extends BaseAdapter{
         TextView laatsteUpdate = (TextView) row.findViewById(R.id.laatsteUpdate);
         TextView omschrijving = (TextView) row.findViewById(R.id.omschrijving);
 
-/*
-        Kleur geven aan even/oneven items in de lijst
-        if ((position % 2) == 0) {
-            row.setBackgroundResource(R.color.white);
-        } else{
-            row.setBackgroundResource(R.color.transWhite);
+        if(rampenLijst.get(position).getTitelRamp() == "Geen rampen momenteel")
+        {
+            ImageView warningImg = (ImageView) row.findViewById(R.id.warningImage);
+            ImageView arrow = (ImageView) row.findViewById(R.id.arrow);
+
+            titelRamp.setTextColor(Color.BLACK);
+            warningImg.setImageResource(R.drawable.no_warning);
+            arrow.setVisibility(View.INVISIBLE);
         }
-*/
 
         titelRamp.setText(rampenLijst.get(position).getTitelRamp());
-        laatsteUpdate.setText(rampenLijst.get(position).getLaatsteUpdate());
+        laatsteUpdate.setText("Laatste update: " + rampenLijst.get(position).getLaatsteUpdate());
         omschrijving.setText(rampenLijst.get(position).getOmschrijving());
 
         return row;
