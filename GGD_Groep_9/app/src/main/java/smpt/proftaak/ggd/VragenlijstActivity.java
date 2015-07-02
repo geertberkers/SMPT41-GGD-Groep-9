@@ -106,7 +106,7 @@ public class VragenlijstActivity extends BaseActivity {
             Toast.makeText(this, "Uw locatie kon niet worden opgehaald. Log a.u.b. eerst in.", Toast.LENGTH_SHORT).show();
             throw new IllegalArgumentException("INVALID POSTCODE");
         }
-        baseURL += "&postcode=";
+        baseURL += "&postcode=" + postcode;
 
         //Add antwoorden to url
         baseURL += "&antwoord=";
