@@ -131,11 +131,17 @@ public class settingsActivity extends BaseActivity implements GoogleApiClient.Co
 
         Plus.PeopleApi.loadVisible(mGoogleApiClient, null).setResultCallback(this);
 
+        SharedPreferences prefs = this.getSharedPreferences("smpt.proftaak.ggd", Context.MODE_PRIVATE);
+
         String personEmail =Plus.AccountApi.getAccountName(mGoogleApiClient);
         Person p = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
         if (p != null) {
             String personName = p.getDisplayName();
+
+            prefs.edit().putString(getString(R.string.sharedpref_email), personEmail);
+            prefs.edit().putString(getString(R.string.sharedpref_name), personName);
         }
+
 
     }
 
@@ -309,8 +315,8 @@ public class settingsActivity extends BaseActivity implements GoogleApiClient.Co
     private boolean sharedPrefPresent() {
         SharedPreferences prefs = this.getSharedPreferences("smpt.proftaak.ggd", Context.MODE_PRIVATE);
 
-        String email = prefs.getString(getString(R.string.sharedpref_number), "");
-        if(email.equals(""))
+        String number = prefs.getString(getString(R.string.sharedpref_number), "");
+        if(number.equals(""))
             return false;
         else
             return true;
