@@ -153,7 +153,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onPause() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
-        super.onPause();}
         super.onPause();
     }
 
