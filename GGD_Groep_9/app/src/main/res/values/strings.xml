@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">R.A.M.P.</string>
+    <string name="app_name">GGD Alert</string>
     <string name="action_settings">Settings</string>
     <string name="action_sendVragenlijst">Verstuur vragenlijst</string>
     <string name="settingsTitel">Instellingen</string>
@@ -19,6 +19,8 @@
     <string name="sharedpref.name">name</string>
     <string name="sharedpref.number">number</string>
     <string name="sharedpref.postcode">postcode</string>
+    <string name="notification.title">GGD Alert</string>
+    <string name="notification.body"></string>
     <string name="GCM.SenderKey">AIzaSyAHg-HHynCNnlDAGvz1sTaddG1CHvl5dZ0</string>
     <string name="GCM.projectNumber">470802811085</string>
     <string name="GCM.url">nada</string>
