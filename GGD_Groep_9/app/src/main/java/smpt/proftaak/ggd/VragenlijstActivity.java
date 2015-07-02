@@ -1,5 +1,7 @@
 package smpt.proftaak.ggd;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -67,7 +69,13 @@ public class VragenlijstActivity extends BaseActivity {
 
         if (id == R.id.action_sendVragenlijst) {
             //TODO
-            buildAntwoordURL();
+            try {
+                buildAntwoordURL();
+            }
+            catch (IllegalArgumentException ex)
+            {
+                finish();
+            }
             Toast.makeText(this, "VERSTUUR VRAGENLIJST", Toast.LENGTH_SHORT).show();
         }
 
@@ -82,13 +90,26 @@ public class VragenlijstActivity extends BaseActivity {
         baseURL += ramp.getID();
 
         //Add user email to url
-        baseURL += "&email=";//TODO
+        SharedPreferences prefs = this.getSharedPreferences("smpt.proftaak.ggd", Context.MODE_PRIVATE);
+        String email = prefs.getString(getString(R.string.sharedpref_email), "");
+        if (email.length() == 0)
+        {
+            Toast.makeText(this, "Uw emailadres kon niet worden opgehaald. Log a.u.b. eerst in.", Toast.LENGTH_SHORT).show();
+            throw new IllegalArgumentException("INVALID EMAIL");
+        }
+        baseURL += "&email=" + email;
 
         //Add user postcode to url
-        baseURL += "&postcode=";//TODO
+        String postcode = prefs.getString(getString(R.string.sharedpref_postcode), "");
+        if (postcode.length() == 0)
+        {
+            Toast.makeText(this, "Uw locatie kon niet worden opgehaald. Log a.u.b. eerst in.", Toast.LENGTH_SHORT).show();
+            throw new IllegalArgumentException("INVALID POSTCODE");
+        }
+        baseURL += "&postcode=";
 
         //Add antwoorden to url
-
+        //symptoomvraag
         String symptomenAntwoord = "";
 
         for (int i = 0; i < symptomenList.getCount(); i++)
@@ -106,7 +127,12 @@ public class VragenlijstActivity extends BaseActivity {
             }
         }
 
-        return symptomenAntwoord;
+        //open vragen
+        for (int i = 0; i < openvragenList.getCount(); i++)
+        {
+            
+        }
+        return baseURL;
     }
 
     public void setData(String data)

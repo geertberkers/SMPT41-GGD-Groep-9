@@ -138,10 +138,10 @@ public class settingsActivity extends BaseActivity implements GoogleApiClient.Co
         if (p != null) {
             String personName = p.getDisplayName();
 
-            prefs.edit().putString(getString(R.string.sharedpref_email), personEmail);
+
             prefs.edit().putString(getString(R.string.sharedpref_name), personName);
         }
-
+        prefs.edit().putString(getString(R.string.sharedpref_email), personEmail);
 
     }
 
