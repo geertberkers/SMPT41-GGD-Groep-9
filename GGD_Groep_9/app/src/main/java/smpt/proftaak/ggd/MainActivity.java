@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, settingsActivity.class);
+            Intent intent = new Intent(this, SettingsActivity.class);
             this.startActivity(intent);
             return true;
         }
@@ -161,6 +161,5 @@ public class MainActivity extends BaseActivity {
         String path = "http://stanjan.nl/smpt/API/rampen.php?postcode=" + postcode;
         APICallTask apiTest = new APICallTask(this, APICallType.GET_RAMPEN, path);
         apiTest.execute();
-
     }
 }

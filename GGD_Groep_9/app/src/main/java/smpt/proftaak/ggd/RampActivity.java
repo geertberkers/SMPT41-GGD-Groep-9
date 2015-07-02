@@ -4,24 +4,12 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.security.auth.callback.Callback;
 
 /**
  * Created by Geert on 18-6-2015
@@ -92,7 +80,7 @@ public class RampActivity extends BaseActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.action_settings:
-                Intent intent = new Intent(this, settingsActivity.class);
+                Intent intent = new Intent(this, SettingsActivity.class);
                 this.startActivity(intent);
                 return true;
         }
