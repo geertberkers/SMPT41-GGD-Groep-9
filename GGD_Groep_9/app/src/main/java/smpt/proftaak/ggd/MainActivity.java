@@ -4,9 +4,15 @@ package smpt.proftaak.ggd;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+<<<<<<< HEAD
+import android.support.v4.content.LocalBroadcastManager;
+=======
+import android.support.v4.widget.SwipeRefreshLayout;
+>>>>>>> origin/master
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +33,8 @@ import smpt.proftaak.ggd.GCM.RegistrationIntentService;
 public class MainActivity extends BaseActivity {
 
     private ArrayList<Ramp> rampenLijst;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private String postcode;
 
     //GCM
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
@@ -38,28 +46,15 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Dit is testdata
-        // Goede data ophalen uit de database
         rampenLijst = new ArrayList<>();
-        rampenLijst.add(new Ramp(1,"Brand Helmond", "Laatste update: 15:00", "Kleine brand met veel rook"));
-        rampenLijst.add(new Ramp(2,"Brand Eindhoven", "Laatste update: 14:00", "Grote brand en veel overlast"));
-        rampenLijst.add(new Ramp(3,"Brand Veldhoven", "Laatste update: 12:30", "Kleine brand, brandweer ter plekke"));
 
-        ListView rampenListView = (ListView) findViewById(R.id.rampenListview);
-        RampAdapter rampAdapter = new RampAdapter(this.getApplicationContext(), rampenLijst);
+        SharedPreferences prefs = this.getSharedPreferences("smpt.proftaak.ggd", Context.MODE_PRIVATE);
+        postcode = prefs.getString(getString(R.string.sharedpref_postcode), "5616NH");
+        System.out.println("Postcode: " + postcode);
 
-        rampenListView.setAdapter(rampAdapter);
+        getRampenFromDatabase();
 
-        rampenListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, RampActivity.class);
-                intent.putExtra("ramp", rampenLijst.get(position));
-                startActivity(intent);
-            }
-        });
         //GCM
-
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -75,6 +70,15 @@ public class MainActivity extends BaseActivity {
                 }
             }
         };
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setColorSchemeColors(R.color.ggdBlauw);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getRampenFromDatabase();
+            }
+        });
 
         if (checkPlayServices()) {
             // Start IntentService to register this application with GCM.
@@ -102,6 +106,27 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void setData(String data) {
+        JSONParser parser = new JSONParser(data);
+        rampenLijst = parser.getRampen();
+
+        ListView rampenListView = (ListView) findViewById(R.id.rampenListview);
+        RampAdapter rampAdapter = new RampAdapter(this.getApplicationContext(), rampenLijst);
+
+        rampenListView.setAdapter(rampAdapter);
+
+        rampenListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, RampActivity.class);
+                intent.putExtra("ramp", rampenLijst.get(position));
+                startActivity(intent);
+            }
+        });
+
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+
     /**
      * Check the device to make sure it has the Google Play Services APK. If
      * it doesn't, display a dialog that allows users to download the APK from
@@ -120,5 +145,25 @@ public class MainActivity extends BaseActivity {
             return false;
         }
         return true;
+    }
+
+<<<<<<< HEAD
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
+=======
+    public void getRampenFromDatabase() {
+        String path = "http://stanjan.nl/smpt/API/rampen.php?postcode=" + postcode;
+        APICallTask apiTest = new APICallTask(this, APICallType.GET_RAMPEN, path);
+        apiTest.execute();
+>>>>>>> origin/master
     }
 }
