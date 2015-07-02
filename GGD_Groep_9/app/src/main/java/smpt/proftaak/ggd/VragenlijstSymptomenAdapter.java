@@ -40,5 +40,4 @@ public class VragenlijstSymptomenAdapter extends ArrayAdapter<String>
 
         return rowView;
     }
-
     }

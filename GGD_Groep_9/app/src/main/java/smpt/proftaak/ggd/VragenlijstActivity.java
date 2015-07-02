@@ -21,6 +21,8 @@ public class VragenlijstActivity extends BaseActivity {
 
     private Vragenlijst vragenlijst;
     private Ramp ramp;
+    private ListView symptomenList;
+    private ListView openvragenList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,10 +67,46 @@ public class VragenlijstActivity extends BaseActivity {
 
         if (id == R.id.action_sendVragenlijst) {
             //TODO
+            buildAntwoordURL();
             Toast.makeText(this, "VERSTUUR VRAGENLIJST", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private String buildAntwoordURL()
+    {
+        String baseURL = "http://http://stanjan.nl/smpt/API//antwoord.php?id=";
+
+        //Add ramp id to url
+        baseURL += ramp.getID();
+
+        //Add user email to url
+        baseURL += "&email=";//TODO
+
+        //Add user postcode to url
+        baseURL += "&postcode=";//TODO
+
+        //Add antwoorden to url
+
+        String symptomenAntwoord = "";
+
+        for (int i = 0; i < symptomenList.getCount(); i++)
+        {
+            View currentRow = symptomenList.getChildAt(i);
+            CheckBox symptoomCheck = (CheckBox)currentRow.findViewById(R.id.symptoomCheck);
+
+            if (symptoomCheck.isChecked())
+            {
+                symptomenAntwoord += "Y";
+            }
+            else
+            {
+                symptomenAntwoord += "N";
+            }
+        }
+
+        return symptomenAntwoord;
     }
 
     public void setData(String data)
@@ -99,7 +137,7 @@ public class VragenlijstActivity extends BaseActivity {
         }
 
         VragenlijstSymptomenAdapter symptomenAdapter = new VragenlijstSymptomenAdapter(this, symptomen);
-        ListView symptomenList = (ListView)findViewById(R.id.vragenlijstSymptomen);
+        symptomenList = (ListView)findViewById(R.id.vragenlijstSymptomen);
         symptomenList.setAdapter(symptomenAdapter);
         setListViewHeightBasedOnChildren(symptomenList);
 
@@ -122,7 +160,7 @@ public class VragenlijstActivity extends BaseActivity {
         }
 
         VragenlijstOpenVragenAdapter openAdapter = new VragenlijstOpenVragenAdapter(this, openVragen);
-        ListView openvragenList = (ListView)findViewById(R.id.vragenlijstOpenVragen);
+        openvragenList = (ListView)findViewById(R.id.vragenlijstOpenVragen);
         openvragenList.setAdapter(openAdapter);
         setListViewHeightBasedOnChildren(openvragenList);
     }
