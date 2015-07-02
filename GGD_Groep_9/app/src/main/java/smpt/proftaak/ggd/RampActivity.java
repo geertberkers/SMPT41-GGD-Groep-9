@@ -80,7 +80,7 @@ public class RampActivity extends BaseActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.action_settings:
-                Intent intent = new Intent(this, SettingsActivity.class);
+                Intent intent = new Intent(this, settingsActivity.class);
                 this.startActivity(intent);
                 return true;
         }

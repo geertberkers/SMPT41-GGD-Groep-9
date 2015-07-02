@@ -35,7 +35,7 @@ import com.google.android.gms.plus.model.people.PersonBuffer;
  * Created by BartKneepkens on 25/06/15.
  */
 
-public class SettingsActivity extends BaseActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
+public class settingsActivity extends BaseActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener, ResultCallback<People.LoadPeopleResult> {
 
     boolean postcodeHidden = true;

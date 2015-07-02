@@ -130,7 +130,7 @@ public class VragenlijstActivity extends BaseActivity {
         //open vragen
         for (int i = 0; i < openvragenList.getCount(); i++)
         {
-            
+
         }
         return baseURL;
     }

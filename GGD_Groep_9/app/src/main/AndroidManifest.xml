@@ -38,7 +38,7 @@
         </activity>
 
         <activity
-            android:name=".SettingsActivity"
+            android:name=".settingsActivity"
             android:label="@string/settingsTitel"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
