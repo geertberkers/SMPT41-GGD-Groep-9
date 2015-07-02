@@ -144,6 +144,12 @@ public class VragenlijstActivity extends BaseActivity {
             //replace spaces to url format
             answer = answer.replaceAll(" ", "%20");
 
+            //zorg dat answer niet leeg is
+            if (answer.length() == 0)
+            {
+                answer = "null";
+            }
+
             //add to base url
             baseURL += "$" + answer;
         }
