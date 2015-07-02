@@ -8,22 +8,18 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-<<<<<<< HEAD
 import android.support.v4.content.LocalBroadcastManager;
-=======
 import android.support.v4.widget.SwipeRefreshLayout;
->>>>>>> origin/master
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import java.util.ArrayList;
 
 import smpt.proftaak.ggd.GCM.QuickstartPreferences;
@@ -147,7 +143,7 @@ public class MainActivity extends BaseActivity {
         return true;
     }
 
-<<<<<<< HEAD
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -159,11 +155,12 @@ public class MainActivity extends BaseActivity {
     protected void onPause() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
         super.onPause();
-=======
+    }
+
     public void getRampenFromDatabase() {
         String path = "http://stanjan.nl/smpt/API/rampen.php?postcode=" + postcode;
         APICallTask apiTest = new APICallTask(this, APICallType.GET_RAMPEN, path);
         apiTest.execute();
->>>>>>> origin/master
+
     }
 }

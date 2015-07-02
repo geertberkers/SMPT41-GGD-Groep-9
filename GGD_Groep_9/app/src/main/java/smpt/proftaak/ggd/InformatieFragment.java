@@ -85,8 +85,14 @@ public class InformatieFragment extends Fragment {
         JSONParser parser = new JSONParser(data);
         info = parser.getInformatie();
 
-        String url = "http://stanjan.nl/smpt/images/info/" + info.getAfbeeldingPath();
-        new DownloadImage(this).execute(url);
+        if(info != null) {
+            String url = "http://stanjan.nl/smpt/images/info/" + info.getAfbeeldingPath();
+            new DownloadImage(this).execute(url);
+        }
+        else
+        {
+            txtTitel.setText("Nog geen informatie beschikbaar");
+        }
     }
 
     public void setImage(Bitmap bitmap)
