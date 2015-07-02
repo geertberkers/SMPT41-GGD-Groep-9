@@ -135,14 +135,14 @@ public class settingsActivity extends BaseActivity implements GoogleApiClient.Co
 
         String personEmail =Plus.AccountApi.getAccountName(mGoogleApiClient);
         Person p = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+        SharedPreferences.Editor editor = prefs.edit();
         if (p != null) {
             String personName = p.getDisplayName();
 
-
-            prefs.edit().putString(getString(R.string.sharedpref_name), personName);
+            editor.putString(getString(R.string.sharedpref_name), personName);
         }
-        prefs.edit().putString(getString(R.string.sharedpref_email), personEmail);
-
+        editor.putString(getString(R.string.sharedpref_email), personEmail);
+        editor.commit();
     }
 
     @Override
@@ -336,12 +336,14 @@ public class settingsActivity extends BaseActivity implements GoogleApiClient.Co
 
     private void saveToSharedPref(String number, String postcode){
         SharedPreferences prefs = this.getSharedPreferences("smpt.proftaak.ggd", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
         if(number != null)
-        prefs.edit().putString(getString(R.string.sharedpref_number), number).apply();
+        editor.putString(getString(R.string.sharedpref_number), number).apply();
 
         if(postcode != null)
-        prefs.edit().putString(getString(R.string.sharedpref_postcode), postcode).apply();
+        editor.putString(getString(R.string.sharedpref_postcode), postcode).apply();
 
+        editor.commit();
     }
 
     private void initGUI() {

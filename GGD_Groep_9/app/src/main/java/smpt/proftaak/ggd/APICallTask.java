@@ -83,6 +83,9 @@ public class APICallTask extends AsyncTask<String, Void, String>
                 InformatieFragment i = (InformatieFragment)parent;
                 i.setData(result);
                 break;
+            case SEND_ANTWOORD:
+                VragenlijstActivity va = (VragenlijstActivity)parent;
+                va.receiveResponse(result);
         }
     }
 }

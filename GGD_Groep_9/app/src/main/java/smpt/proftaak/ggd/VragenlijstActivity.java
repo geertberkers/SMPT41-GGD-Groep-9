@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -67,17 +69,19 @@ public class VragenlijstActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        String antwoordURL = "";
 
         if (id == R.id.action_sendVragenlijst) {
-            //TODO
-            try {
-                buildAntwoordURL();
+            try
+            {
+                antwoordURL = buildAntwoordURL();
             }
             catch (IllegalArgumentException ex)
             {
                 finish();
             }
-            Toast.makeText(this, "VERSTUUR VRAGENLIJST", Toast.LENGTH_SHORT).show();
+
+            sendAntwoordToAPI(antwoordURL);
         }
 
         return super.onOptionsItemSelected(item);
@@ -85,7 +89,7 @@ public class VragenlijstActivity extends BaseActivity {
 
     private String buildAntwoordURL()
     {
-        String baseURL = "http://http://stanjan.nl/smpt/API//antwoord.php?id=";
+        String baseURL = "http://stanjan.nl/smpt/API//antwoord.php?id=";
 
         //Add ramp id to url
         baseURL += ramp.getID();
@@ -135,16 +139,17 @@ public class VragenlijstActivity extends BaseActivity {
         for (int i = 0; i < openvragenList.getCount(); i++)
         {
             View currentRow = openvragenList.getChildAt(i);
-            String answer = ((EditText)findViewById(R.id.openvraagInput)).getText().toString();
+            String answer = ((EditText)currentRow.findViewById(R.id.openvraagInput)).getText().toString();
 
             //replace spaces to url format
-            answer.replaceAll(" ", "%20");
+            answer = answer.replaceAll(" ", "%20");
 
             //add to base url
             baseURL += "$" + answer;
         }
 
         //return result
+        System.out.println(baseURL);
         return baseURL;
     }
 
@@ -202,5 +207,24 @@ public class VragenlijstActivity extends BaseActivity {
         openvragenList = (ListView)findViewById(R.id.vragenlijstOpenVragen);
         openvragenList.setAdapter(openAdapter);
         setListViewHeightBasedOnChildren(openvragenList);
+    }
+
+    private void sendAntwoordToAPI(String antwoordString)
+    {
+        APICallTask task = new APICallTask(this, APICallType.SEND_ANTWOORD, antwoordString);
+        task.execute();
+    }
+
+    public void receiveResponse(String response)
+    {
+        if (response.toLowerCase().equals("succes!"))
+        {
+            Toast.makeText(this, "Uw vragenlijst is verstuurd. Bedankt voor uw medewerking.", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(this, "Uw vragenlijst kon helaas niet verstuurd worden.", Toast.LENGTH_SHORT).show();
+        }
+        finish();
     }
 }
