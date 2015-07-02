@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -109,6 +110,8 @@ public class VragenlijstActivity extends BaseActivity {
         baseURL += "&postcode=";
 
         //Add antwoorden to url
+        baseURL += "&antwoord=";
+
         //symptoomvraag
         String symptomenAntwoord = "";
 
@@ -126,12 +129,22 @@ public class VragenlijstActivity extends BaseActivity {
                 symptomenAntwoord += "N";
             }
         }
+        baseURL += symptomenAntwoord;
 
         //open vragen
         for (int i = 0; i < openvragenList.getCount(); i++)
         {
+            View currentRow = openvragenList.getChildAt(i);
+            String answer = ((EditText)findViewById(R.id.openvraagInput)).getText().toString();
 
+            //replace spaces to url format
+            answer.replaceAll(" ", "%20");
+
+            //add to base url
+            baseURL += "$" + answer;
         }
+
+        //return result
         return baseURL;
     }
 
