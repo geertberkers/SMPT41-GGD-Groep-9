@@ -31,9 +31,9 @@ public class JSONParser {
                 int id = jsonObject.getInt("id");
                 String naam = jsonObject.getString("naam");
                 String beschrijving = jsonObject.getString("beschrijving");
-                String begintijd = jsonObject.getString("begintijd");
+                String laatsteupdate = jsonObject.getString("laatsteupdate");
 
-                resultRampen.add(new Ramp(id,naam,beschrijving,begintijd));
+                resultRampen.add(new Ramp(id,naam,laatsteupdate,beschrijving));
             }
         }
         catch(JSONException ex)

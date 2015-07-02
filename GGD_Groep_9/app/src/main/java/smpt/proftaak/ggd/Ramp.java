@@ -16,7 +16,12 @@ public class Ramp implements Parcelable{
     public Ramp(int id, String titelRamp, String laatsteUpdate, String omschrijving) {
         this.id = id;
         this.titelRamp = titelRamp;
-        this.laatsteUpdate = laatsteUpdate;
+        if(id == 0) {
+            this.laatsteUpdate = laatsteUpdate;
+        }
+        else {
+            this.laatsteUpdate = parseDate(laatsteUpdate);
+        }
         this.omschrijving = omschrijving;
     }
 
@@ -34,6 +39,11 @@ public class Ramp implements Parcelable{
 
     public String getOmschrijving() {
         return omschrijving;
+    }
+
+    public String parseDate(String date)
+    {
+        return date.substring(5,10) + "-" + date.substring(0,4) + date.substring(10);
     }
 
     public Ramp(Parcel read){

@@ -20,7 +20,10 @@ import android.widget.ListView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import smpt.proftaak.ggd.GCM.QuickstartPreferences;
 import smpt.proftaak.ggd.GCM.RegistrationIntentService;
@@ -107,18 +110,31 @@ public class MainActivity extends BaseActivity {
         rampenLijst = parser.getRampen();
 
         ListView rampenListView = (ListView) findViewById(R.id.rampenListview);
-        RampAdapter rampAdapter = new RampAdapter(this.getApplicationContext(), rampenLijst);
 
-        rampenListView.setAdapter(rampAdapter);
+        if(rampenLijst.size() > 1) {
+            RampAdapter rampAdapter = new RampAdapter(this.getApplicationContext(), rampenLijst);
 
-        rampenListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, RampActivity.class);
-                intent.putExtra("ramp", rampenLijst.get(position));
-                startActivity(intent);
-            }
-        });
+            rampenListView.setAdapter(rampAdapter);
+
+            rampenListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(MainActivity.this, RampActivity.class);
+                    intent.putExtra("ramp", rampenLijst.get(position));
+                    startActivity(intent);
+                }
+            });
+        }
+        else
+        {
+            DateFormat df = new SimpleDateFormat("dd-MM-yyy HH:mm:ss");
+            String date = df.format(Calendar.getInstance().getTime());
+
+            rampenLijst.add(new Ramp(0,"Geen rampen momenteel",date, "Er zijn geen rampen bij u in de buurt!"));
+            RampAdapter rampAdapter = new RampAdapter(this.getApplicationContext(), rampenLijst);
+
+            rampenListView.setAdapter(rampAdapter);
+        }
 
         mSwipeRefreshLayout.setRefreshing(false);
     }

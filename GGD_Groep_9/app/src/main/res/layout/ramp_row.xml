@@ -18,8 +18,8 @@
         android:layout_alignParentTop="true"
         android:src="@drawable/warning"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_above="@+id/omschrijving"
-        android:scaleType="center" />
+        android:scaleType="fitCenter"
+        android:layout_alignBottom="@+id/omschrijving" />
 
     <TextView
         android:id="@+id/titelRamp"
@@ -40,7 +40,6 @@
         android:layout_below="@+id/titelRamp"
         android:layout_toLeftOf="@+id/arrow"
         android:layout_toRightOf="@+id/warningImage"
-        android:textStyle="bold"
         android:textColor="@color/zwart"
         android:text="@string/laatsteUpdate"
         android:layout_marginBottom="@dimen/half_activity_vertical_margin"

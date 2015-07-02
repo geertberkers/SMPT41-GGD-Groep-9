@@ -5,6 +5,7 @@
     android:background="@color/achtergrond"
     android:orientation="vertical"
     android:weightSum="1">
+    
     <LinearLayout
         android:id="@+id/linearMap"
         android:layout_width="match_parent"
@@ -72,6 +73,7 @@
         android:layout_marginTop="106dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/fireDescription" />
 
 </RelativeLayout>
