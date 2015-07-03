@@ -111,7 +111,7 @@ public class MainActivity extends BaseActivity {
 
         ListView rampenListView = (ListView) findViewById(R.id.rampenListview);
 
-        if(rampenLijst.size() > 1) {
+        if(rampenLijst.size() > 0) {
             RampAdapter rampAdapter = new RampAdapter(this.getApplicationContext(), rampenLijst);
 
             rampenListView.setAdapter(rampAdapter);
